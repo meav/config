@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2020-06-15 14:29:23" build="180506">
+		<key name=".Vanilla" modified="2020-07-30 17:17:40" build="180506">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -38,7 +38,7 @@
 			<value name="Update.UseBuilds" type="hex" data="01"/>
 			<value name="FontUseDpi" type="hex" data="01"/>
 			<value name="FontUseUnits" type="hex" data="01"/>
-			<value name="FontSize" type="ulong" data="18"/>
+			<value name="FontSize" type="ulong" data="21"/>
 			<value name="StatusFontHeight" type="long" data="12"/>
 			<value name="TabFontHeight" type="long" data="13"/>
 			<key name="HotKeys" modified="2020-05-21 22:32:22" build="180528">
@@ -309,8 +309,8 @@
 			<value name="Multi.Iterate" type="hex" data="01"/>
 			<value name="Multi.SplitWidth" type="hex" data="04"/>
 			<value name="Multi.SplitHeight" type="hex" data="04"/>
-			<value name="FontName" type="string" data="Consolas"/>
-			<value name="FontName2" type="string" data="Consolas"/>
+			<value name="FontName" type="string" data="Haskplex Nerd"/>
+			<value name="FontName2" type="string" data="Courier New"/>
 			<value name="FontAutoSize" type="hex" data="00"/>
 			<value name="FontSizeX" type="ulong" data="0"/>
 			<value name="FontSizeX2" type="ulong" data="18"/>
@@ -341,8 +341,8 @@
 			<value name="ConWnd X" type="long" data="10"/>
 			<value name="ConWnd Y" type="long" data="10"/>
 			<value name="LastMonitor" type="string" data="0,0,1024,768"/>
-			<value name="ConWnd Width" type="dword" data="00000074"/>
-			<value name="ConWnd Height" type="dword" data="00000021"/>
+			<value name="ConWnd Width" type="dword" data="02000062"/>
+			<value name="ConWnd Height" type="dword" data="0200005c"/>
 			<value name="16bit Height" type="ulong" data="0"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
 			<value name="RestoreInactive" type="hex" data="01"/>
@@ -352,7 +352,7 @@
 			<value name="FocusInChildWindows" type="hex" data="01"/>
 			<value name="HideCaptionAlways" type="hex" data="01"/>
 			<value name="HideCaptionAlwaysFrame" type="hex" data="00"/>
-			<value name="HideCaptionAlwaysDelay" type="ulong" data="30000"/>
+			<value name="HideCaptionAlwaysDelay" type="ulong" data="9999999"/>
 			<value name="HideCaptionAlwaysDisappear" type="ulong" data="2"/>
 			<value name="DownShowHiddenMessage" type="hex" data="00"/>
 			<value name="DownShowExOnTopMessage" type="hex" data="00"/>
@@ -399,9 +399,9 @@
 			<value name="FarGotoEditorPath" type="string" data='far.exe /e%1:%2 "%3"'/>
 			<value name="HighlightMouseRow" type="hex" data="00"/>
 			<value name="HighlightMouseCol" type="hex" data="00"/>
-			<value name="FixFarBorders" type="hex" data="01"/>
+			<value name="FixFarBorders" type="hex" data="00"/>
 			<value name="Anti-aliasing2" type="hex" data="00"/>
-			<value name="FixFarBordersRanges" type="string" data="2013-25C4;"/>
+			<value name="FixFarBordersRanges" type="string" data="E0A0-E0E0;"/>
 			<value name="ExtendUCharMap" type="hex" data="01"/>
 			<value name="EnhanceGraphics" type="hex" data="00"/>
 			<value name="EnhanceButtons" type="hex" data="00"/>

@@ -7,6 +7,8 @@ local goals = parser(
 		
 		"--title=",
 		
+		'""',
+		
 		ytdl,
 		
 		"--volume=0" .. parser()

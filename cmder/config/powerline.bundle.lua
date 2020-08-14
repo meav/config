@@ -91,9 +91,9 @@ __luapack_modules__ = {
 			end
 		
 			return {
-				fg = Powerline.Colors.black,
-				bg = Powerline.Colors.blue,
-				value = table.concat(pathList, Powerline.Symbols.segmentSoft)
+				fg = Powerline.Colors.lightWhite,
+				bg = Powerline.Colors.green,
+				value = table.concat(pathList, Powerline.Symbols.segmentcwd)
 			}
 		end
 		
@@ -535,8 +535,9 @@ __luapack_modules__ = {
 		}
 		
 		Powerline.Symbols = {
-			segment = "",
-			segmentSoft = "",
+			segment = "",
+			segmentSoft = "",
+			segmentcwd = "",
 			branch = ""
 		}
 		
@@ -651,8 +652,8 @@ __luapack_modules__ = {
 					style.bg = segment.bg
 		
 					if previousSegment.bg == segment.bg then
-						style.fg = segment.fg
-						divider = Powerline.Symbols.segmentSoft
+						style.fg = Powerline.Colors.red
+						divider = Powerline.Symbols.segmentcwd
 					end
 				else
 					-- Add soft divider on Black -> Black
@@ -691,5 +692,5 @@ end
 local Powerline = __luapack_require__(11)
 
 
-Powerline.init({"text/\n:black+black", "textseg/\x1b[29B\x1b[29A>:black+blue", "time:lightWhite+magenta", "ampm:lightWhite+red", "date:lightWhite+blue", "text/\n\n", "cwd:lightWhite+green", "git", "text/\n\n", "lambda/λ/Admin-⚡1"})
+Powerline.init({"text/\n:black+black", "textseg/\x1b[29B\x1b[29A>:black+blue", "time:lightWhite+magenta", "ampm:lightWhite+red", "date:lightWhite+blue", "text/\n\n", "cwd", "git", "text/\n\n", "lambda//Admin1"})
 -- Powerline.init({"textseg/>:black+yellow", "time", "cwd", "git", "node", "text/\n", "lambda/λ/root ⚡1"})

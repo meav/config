@@ -3,4 +3,4 @@
 
 :: call "%GIT_INSTALL_ROOT%/cmd/start-ssh-agent.cmd"
 :: set "PATH=%CMDER_ROOT%\vendor\whatever;%PATH%"
-
+%ccall% "/message" "C:\Users\vhd\Desktop\cmder\config\message.bat"

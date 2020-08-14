@@ -4,12 +4,25 @@ set numberwidth=4
 setlocal foldmethod=syntax
 
 silent! call plug#begin()
+Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\nerdtree'
 Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\fold'
 Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\garden-theme'
 Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\MatchTag'
 Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\lightline'
 Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\surround'
+Plug 'C:\Users\vhd\Desktop\Neovim\Neovim\plug\devicons'
 call plug#end()
+
+let g:loaded_netrwPlugin = 1
+let NERDTreeQuitOnOpen=3
+let NERDTreeShowHidden=1
+let NERDTreeShowLineNumbers=1
+let NERDTreeWinPos="right"
+let NERDTreeWinSize=80
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
+let NERDTreeCustomOpenArgs={'file': {'reuse':'currenttab', 'where':'p', 'keepopen':1, 'stay':1}}
+command E NERDTreeCWD
 
 set termguicolors     " enable true colors support
 set guicursor=n-v-ve:hor20-Cursorgreen/lCursorgreen,i-c-ci:ver25,r-cr:hor20-blinkwait300-blinkon200-blinkoff15,o:hor50
@@ -25,7 +38,6 @@ let g:lightline = {
       \             [ 'readonly', 'modified', 'split' ] ],
       \   'right': [ [ 'fileencoding' ],
       \             [ 'fileformat' ],
-      \             [ 'open', 'filetype', 'close' ],
       \             [ 'percent' ],
       \             [ 'lineinfo' ],
       \             [ 'mode' ] ]
@@ -35,7 +47,6 @@ let g:lightline = {
       \             [ 'readonly', 'modified', 'split' ] ],
       \   'right': [ [ 'fileencoding' ],
       \             [ 'fileformat' ],
-      \             [ 'open','filetype','close' ],
       \             [ 'percent' ],
       \             [ 'lineinfo' ],
       \             [ 'mode' ] ]
@@ -48,19 +59,21 @@ let g:lightline = {
       \   },
       \ 'component': {
       \   'filename': '%F',
-      \   'filetype': '%Y',
       \   'lineinfo': '%l/%L',
       \   'split': '|',
-      \   'open': '',
-      \   'close': '',
       \ },
       \ 'component_function': {
       \   'readonly': 'LightlineReadonly',
       \   'clock': 'LightlineClock',
       \   'ampm': 'LightlineAmpm',
       \   'date': 'LightlineDate',
-      \ },
+      \   'fileformat': 'MyFileformat',
       \ }
+      \ }
+
+function! MyFileformat()
+  return &fileformat . ' ' . WebDevIconsGetFileFormatSymbol()
+endfunction
 
 function! LightlineReadonly()
   return &readonly ? '[Read-only]' : ''

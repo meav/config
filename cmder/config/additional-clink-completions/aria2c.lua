@@ -7,7 +7,7 @@ local goals = parser(
 		
 	command,	
 
-	"--"
+	"aa"
 		
 	}
 ):loop(1)

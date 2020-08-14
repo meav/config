@@ -93,8 +93,8 @@ let s:_lightline = {
       \     'right': [['close']]
       \   },
       \   'tab': {
-      \     'active': ['tabnum', 'filename', 'modified'],
-      \     'inactive': ['tabnum', 'filename', 'modified']
+      \     'active': ['tabnum', 'filename', 'icon', 'modified'],
+      \     'inactive': ['tabnum', 'filename', 'icon', 'modified']
       \   },
       \   'component': {
       \     'mode': '%{lightline#mode()}',
@@ -119,7 +119,8 @@ let s:_lightline = {
       \   'tab_component': {},
       \   'tab_component_function': {
       \     'filename': 'lightline#tab#filename', 'modified': 'lightline#tab#modified',
-      \     'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum'
+      \     'readonly': 'lightline#tab#readonly', 'tabnum': 'lightline#tab#tabnum',
+      \     'icon': 'lightline#tab#icon'
       \   },
       \   'colorscheme': 'default',
       \   'mode_map': {

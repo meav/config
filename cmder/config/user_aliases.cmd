@@ -6,7 +6,7 @@
 ;= Add aliases below here
 alias=C:\Users\vhd\Desktop\Neovim\Neovim\ConEmuPack.180506\ConEmu.exe /Title NeoVim /Run nvim.exe -n -i NONE -u C:\Users\vhd\Desktop\Neovim\Neovim\plug\init.vim "C:\Users\vhd\Desktop\cmder\config\user_aliases.cmd"
 e.=explorer .
-gl=git log --graph --decorate=full --max-count=5 --source $*
+gl=git log --graph --decorate=full --max-count=10 --source $*
 ls=ls --show-control-chars -F --color $*
 pwd=cd
 clear=cls
@@ -27,8 +27,8 @@ rclone="C:\Users\vhd\Music\rclone-v1.51.0-windows-386\rclone.exe" $*
 saldl=echo | set /p=C:\Users\vhd\Music\saldl-win32\saldl-win32.exe --resume --status-refresh-interval=1 --root-dir=C:\Users\vhd\Desktop --output-filename= --cookie-file= --single --connections=10 ""|clip&echo.&echo C:\Users\vhd\Music\saldl-win32\saldl-win32.exe --resume --status-refresh-interval=1 --root-dir=C:\Users\vhd\Desktop --output-filename= --cookie-file= --single --connections=10 ""
 mpv.com=mpv $*
 yt=youtube-dl $*
-nodejs=explorer "C:\Users\vhd\Music\nodejs-portable\nodejs-portable.exe"
-paint= explorer %windir%\system32\mspaint.exe
+nodejs="C:\Users\vhd\Music\nodejs-portable\nodejs-portable.exe"
+paint=explorer %windir%\system32\mspaint.exe
 snipping=explorer %windir%\system32\SnippingTool.exe
 bootice=explorer "C:\Users\vhd\Music\BOOTICE_2016.06.17_v1.3.4.0\BOOTICEx86_2016.06.17_v1.3.4.0.exe"
 iso=explorer "C:\Users\vhd\Music\PowerISO 6.1\PowerISOPortable.exe"

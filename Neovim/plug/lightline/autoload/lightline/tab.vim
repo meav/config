@@ -29,5 +29,13 @@ function! lightline#tab#tabnum(n) abort
   return a:n
 endfunction
 
+function! lightline#tab#icon(n) abort
+"  WebDevIconsGetFileTypeSymbol()
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let _ = expand('#'.buflist[winnr - 1].':t')
+  return WebDevIconsGetFileTypeSymbol(_)
+endfunction
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
