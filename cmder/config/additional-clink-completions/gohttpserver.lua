@@ -1,6 +1,6 @@
 parser = clink.arg.new_parser
 
-command = '--port 80 --theme=green --upload --delete'
+command = '--port=80 --theme=green --upload --delete'
 
 local goals = parser(
 	{
