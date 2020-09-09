@@ -1,9 +1,0 @@
-
-set editing-mode vi
-
-set keymap vi-insert
-"\t": clink-menu-completion-shim
-
-set keymap vi-move
-"dd": kill-whole-line
-"p": paste-from-clipboard

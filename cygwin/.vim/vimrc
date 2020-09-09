@@ -1,0 +1,113 @@
+set background=light
+set termguicolors
+syntax enable
+colorscheme garden
+
+let &t_SI.="\e[6 q"
+let &t_EI.="\e[4 q"
+let &t_SR.="\e[3 q"
+
+let skip_defaults_vim=1
+set viminfo=""
+
+set number
+set relativenumber
+set numberwidth=4
+
+let NERDTreeQuitOnOpen=3
+let NERDTreeShowHidden=1
+let NERDTreeShowLineNumbers=1
+let NERDTreeWinPos="right"
+let NERDTreeWinSize=80
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
+let NERDTreeCustomOpenArgs={'file': {'reuse':'currenttab', 'where':'p', 'keepopen':1, 'stay':1}}
+command Tree NERDTreeFind
+
+let g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+let g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+let s:folder = "138D75"
+let g:WebDevIconsDefaultFolderSymbolColor = s:folder " sets the color for folders that did not match any rule
+
+set laststatus=2
+set noshowmode
+set showtabline=2
+
+let g:lightline = {
+      \ 'colorscheme': 'ayu_mirage',
+      \ 'active': {
+      \   'left': [ [ 'filename' ],
+      \             [ 'readonly', 'modified', 'split' ] ],
+      \   'right': [ [ 'fileencoding' ],
+      \             [ 'fileformat' ],
+      \             [ 'percent' ],
+      \             [ 'lineinfo' ],
+      \             [ 'mode' ] ]
+      \ },
+      \ 'inactive': {
+      \   'left': [ [ 'filename' ],
+      \             [ 'readonly', 'modified', 'split' ] ],
+      \   'right': [ [ 'fileencoding' ],
+      \             [ 'fileformat' ],
+      \             [ 'percent' ],
+      \             [ 'lineinfo' ],
+      \             [ 'mode' ] ]
+      \ },
+      \   'tabline': {
+      \     'left': [['tabs']],
+      \     'right': []
+      \   },
+      \ 'component': {
+      \   'filename': '%F',
+      \   'lineinfo': '%l/%L',
+      \   'split': '|',
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'LightlineReadonly',
+      \   'clock': 'LightlineClock',
+      \   'ampm': 'LightlineAmpm',
+      \   'date': 'LightlineDate',
+      \   'fileformat': 'MyFileformat',
+      \ }
+      \ }
+
+function! MyFileformat()
+  return &fileformat . ' ' . WebDevIconsGetFileFormatSymbol()
+endfunction
+
+function! LightlineReadonly()
+  return &readonly ? '[Read-only]' : ''
+endfunction
+
+"      \   'tabline': {
+"      \     'left': [['tabs']],
+"      \     'right': [['date'],
+"      \              ['ampm'],
+"      \              ['clock']]
+"      \   },
+
+" function! LightlineClock()
+"   return strftime('%I:%M')
+" endfunction
+" 
+" function! LightlineAmpm()
+"   return strftime('%p')
+" endfunction
+" 
+" function! LightlineDate()
+"   return strftime('%A, %d/%m/%Y')
+" endfunction
+
+let g:conoline_auto_enable = 1
+let g:conoline_color_normal_light = 'guibg=#eaeaea'
+let g:conoline_color_normal_nr_light = 'guibg=#ffffff'
+let g:conoline_color_insert_light = 'guibg=#ffffff'
+let g:conoline_color_insert_nr_light = 'guibg=#ffffff'
+
+map <C-j> <esc><C-w>j
+map <C-k> <esc><C-w>k
+command Cygwin !explorer "C:\Users\vhd\Desktop\cygwin\cygwin-portable.cmd"
