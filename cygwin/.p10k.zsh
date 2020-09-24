@@ -34,10 +34,10 @@
     # =========================[ Line #1 ]=========================
     top
     vi_mode                 # vi mode (you don't need this if you've enabled prompt_char)
-    time                    # current time
-    timeampm
-    date
-    newline
+#   time                    # current time
+#   timeampm
+#   date
+#   newline
   # os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
@@ -55,8 +55,6 @@
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    lanip
-    newline
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
@@ -126,22 +124,22 @@
   # typeset -g POWERLEVEL9K_EXAMPLE_FOREGROUND=3
   # typeset -g POWERLEVEL9K_EXAMPLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
-  function prompt_date() {
-	p10k segment -b '#FFCCFF' -f '#990099' -i '' -t '%D{%A, %d/%m/%Y}'
-}
-
-  function prompt_timeampm() {
-	p10k segment -f '#99FFFF' -b '#CC3300' -i '' -t '%D{%p}'
-}
-
+#  function prompt_date() {
+#	p10k segment -b '#FFCCFF' -f '#990099' -i '' -t '%D{%A, %d/%m/%Y}'
+#}
+#
+#  function prompt_timeampm() {
+#	p10k segment -f '#99FFFF' -b '#CC3300' -i '' -t '%D{%p}'
+#}
+#
   function prompt_timeprompt() {
 	p10k segment -b white -t '%D{%I:%M}'
 }
-
-  function prompt_lanip() {
-	lanip=$(ipconfig | grep -m1 192.168 | awk '{print $14}' | tr -d '\r')
-	p10k segment -f '#993333' -b '#669999' -i '' -t $lanip;
-}
+#
+#  function prompt_lanip() {
+#	lanip=$(ipconfig | grep -m1 192.168 | awk '{print $14}' | tr -d '\r')
+#	p10k segment -b '#FFCCFF' -f '#990099' -i '' -t $lanip;
+#}
 
   function prompt_top() {
 #	printf '\n%.0s' {1..25}

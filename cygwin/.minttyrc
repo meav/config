@@ -1,12 +1,15 @@
+IMECursorColour=255,0,0
+SuppressOSC=112
+
 ScrollMod=ctrl
 CtrlExchangeShift=yes
 KeyFunctions=l:switch-next;h:switch-prev;\
 y:copy;p:paste;\
 
-X=10
-Y=10
-Columns=100
-Rows=29
+X=1
+Y=1
+Columns=103
+Rows=32
 RowSpacing=5
 Scrollbar=none
 
@@ -36,8 +39,8 @@ Black=59,66,82
 BoldBlack=76,86,106
 Red=191,97,106
 BoldRed=191,97,106
-Green=36,153,85
-BoldGreen=163,190,140
+Green=10,152,57
+BoldGreen=10,152,57
 Yellow=235,203,139
 BoldYellow=235,203,139
 Blue=129,161,193
@@ -48,4 +51,3 @@ Cyan=136,192,208
 BoldCyan=143,188,187
 White=229,233,240
 BoldWhite=236,239,244
-ClicksPlaceCursor=yes

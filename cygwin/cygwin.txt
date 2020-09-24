@@ -1,0 +1,3 @@
+bc,curl,expect,git,gnupg,inetutils,lz4,mc,nc,openssl,psmisc,pv,rsync,unzip,vim,wget,zip,zsh,aria2,tmux,qrencode,tree,fzf
+mintty --nopin --Title Message --Border void --exec "%CYGWIN_ROOT%\home\root\bin\message.sh" -
+start "" "C:\Users\vhd\Music\cygwin\tmux.lnk"

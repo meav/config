@@ -69,7 +69,7 @@ DISABLE_MAGIC_FUNCTIONS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(vi-mode zsh-autosuggestions zsh-syntax-highlighting globalias)
+plugins=(zsh-autosuggestions fast-syntax-highlighting globalias)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -111,60 +111,56 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'o' accept-line
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+source ~/bin/vi-mode.zsh
+source ~/bin/fzf-completion.zsh
+source ~/bin/zsh-fzf-snippet.zsh
 
 hash -d vhd=/cygdrive/c/Users/vhd
 
+alias ls='ls --color=tty -a'
 alias rm='rm -i'
 alias gl='git log --graph --decorate=full --source'
 alias e=explorer
-alias music='cygstart --show "C:\Users\vhd\Music"'
-alias tondong='cygstart --show "D:\Users\a\Music\WWW\1"'
-alias zip='cygstart --show "C:\Users\vhd\Music\7-ZipPortable\7-ZipPortable.lnk"'
-alias cent='cygstart --show --show "C:\Users\vhd\Music\centbrowser_3.4.3.39\chrome.exe"'
-alias facebook='cygstart --show "C:\Users\vhd\Music\centbrowser_3.4.3.39\Facebook.lnk"'
-alias perfmonitor='cygstart --show "C:\Users\vhd\Music\PerfMonZip\PerfMon.exe"'
-alias baidu='cygstart --show "C:\Users\vhd\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"'
+alias music='explorer "C:\Users\vhd\Music"'
+alias tondong='explorer "D:\Users\a\Music\WWW\1"'
+alias zip='cmd.exe /c start "" explorer "C:\Users\vhd\Music\7-ZipPortable\7-ZipPortable.lnk"'
+alias cent='cmd.exe /c start "" explorer "C:\Users\vhd\Music\centbrowser_3.4.3.39\chrome.exe"'
+alias facebook='cmd.exe /c start "" explorer "C:\Users\vhd\Music\centbrowser_3.4.3.39\Facebook.lnk"'
+alias perfmonitor='cmd.exe /c start "" explorer "C:\Users\vhd\Music\PerfMonZip\PerfMon.exe"'
+alias baidu='cmd.exe /c start "" explorer "C:\Users\vhd\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"'
 alias ffmpegguide='echo && (wget -O- -q "https://raw.githubusercontent.com/meav/text/master/FFMPEG/README.md" | cat --number)'
 alias mpv='mpv.com'
-alias mpvcmd='cmd /k "C:\Users\vhd\Desktop\cygwin\cygwin\home\root\bin\mpv.com"'
 alias yt=youtube-dl.exe
 alias rclone=/cygdrive/c/Users/vhd/Music/rclone-v1.51.0-windows-386/rclone.exe
-alias paint='cygstart --show "C:\Windows\system32\mspaint.exe"'
-alias snipping='cygstart --show "C:\Windows\system32\SnippingTool.exe"'
-alias bootice='cygstart --show "C:\Users\vhd\Music\BOOTICE_2016.06.17_v1.3.4.0\BOOTICEx86_2016.06.17_v1.3.4.0.exe"'
-alias iso='cygstart --show "C:\Users\vhd\Music\PowerISO 6.1\PowerISOPortable.exe"'
-alias goodbyedpi='cygstart --show "C:\Users\vhd\Music\goodbyedpi-0.1.6"'
-alias uninstall='cygstart --show "C:\Program Files\VS Revo Group\Revo Uninstaller Pro\RevoUninPro.exe"'
-alias pdf=/cygdrive/c/Users/vhd/Music/PDF-XChangeViewerPortable/PDF-XChangeViewerPortable.exe
-alias winpath='cygpath -t windows'
-alias desktop='cygstart --show "C:\Users\vhd\Music\WW\desktop.vbs"'
+alias paint='cmd.exe /c start "" explorer "C:\Windows\system32\mspaint.exe"'
+alias snipping='cmd.exe /c start "" explorer "C:\Windows\system32\SnippingTool.exe"'
+alias bootice='cmd.exe /c start "" explorer "C:\Users\vhd\Music\BOOTICE_2016.06.17_v1.3.4.0\BOOTICEx86_2016.06.17_v1.3.4.0.exe"'
+alias iso='cmd.exe /c start "" explorer "C:\Users\vhd\Music\PowerISO 6.1\PowerISOPortable.exe"'
+alias goodbyedpi='explorer "C:\Users\vhd\Music\goodbyedpi-0.1.6"'
+alias uninstall='explorer "C:\Program Files\VS Revo Group\Revo Uninstaller Pro\RevoUninPro.exe"'
+alias pdf='explorer "C:\Users\vhd\Music\PDF-XChangeViewerPortable\PDF-XChangeViewerPortable.exe"'
+alias gohttpserver='qrencode -t ANSIUTF8 http://$lanip; gohttpserver.exe --port=80 --theme=green --upload --delete'
+alias curl='curl --location --continue-at -'
+alias wget='wget --continue --progress=bar:force:noscroll'
+alias aria2c='aria2c --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5'
+alias desktop='explorer "C:\Users\vhd\Music\WW\desktop.vbs"'
 alias quit='rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;exit'
 alias power='rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;explorer "C:\Users\vhd\Music\WW\power.vbs"'
-alias message='cygstart --show "C:\Users\vhd\Desktop\cygwin\message.cmd"'
-alias cygwin='cygstart --show "C:\Users\vhd\Desktop\cygwin\cygwin-portable.cmd"'
+alias message='explorer "C:\Users\vhd\Music\cygwin\message.cmd"'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 compdef _mpv mpv.com
 function _mpv {
-alias -g sdquatity='"bestvideo[height<=?500][fps<=?30][vcodec!=?vp9]+bestaudio/best[height<=?500]"'
     _arguments -C -s \
-       '--title=[Title]' \
-       '--ytdl-format[SD Quality]:SD Quality:(sdquatity)' \
-#
-    _tags files
-    while _tags; do
-      _requested files expl 'media file' _files && ret=0
-      (( ret )) || return 0
-    done
+       '--title=[Title]'
+    _files
 }
 
-compdef _gohttpserver gohttpserver
+compdef _gohttpserver gohttpserver.exe
 function _gohttpserver {
     _arguments -C -s \
-       '--port=80 --theme=green --upload --delete[Standard]' \
        '--help[Help]' \
        '--root=[Folder]:Folder:_files' \
 }
@@ -172,8 +168,48 @@ function _gohttpserver {
 compdef _curl curl
 function _curl {
     _arguments -C -s \
-       '-L -C - -o[File name]' \
+       '--location[Accept redirect]:Redirect:_files' \
+       '--continue-at[Continue]:Continue:_files' \
+       '--output[File name]:Filename:_files' \
        '--help[Help]' \
-       '-b[Cookies file]:Cookies:_files' \
-       '-x[protocol://user:password@address:port]' \
+       '--cookie[Cookies file]:Cookies:_files' \
+       '--proxy[Proxy]:Proxy:_files' \
+}
+
+compdef _wget wget
+function _wget {
+    _arguments -C -s \
+       '--continue[Continue]' \
+       '--progress=[Progress]' \
+       '--output-document=[File name]:Filenames:_files' \
+       '--load-cookies[Cookies file]:Cookies:_files' \
+       '--help[Help]' \
+       '--execute[Command]:Command:_files' \
+}
+
+# --split=5 --max-connection-per-server=5 --max-concurrent-downloads=2 --continue --all-proxy=[http://][USER:PASSWORD@]HOST[:PORT] --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M  --version 
+compdef _aria2c aria2c
+function _aria2c {
+    _arguments -C -s \
+       '--load-cookies=[Cookies file]:Cookies:_files' \
+       '--dry-run[Dry run]' \
+       '--split=[Split]:Split:int' \
+       '--max-connection-per-server=[Max connection per server]:maxconperserver:int' \
+       '--max-concurrent-downloads=[Max concurrent download]:maxfiledown:int' \
+       '--continue[Continue]' \
+       '--all-proxy=[Proxy]' \
+       '--max-tries=[Max tries]:maxtries:int' \
+       '--disk-cache=[Disk cacke]:diskcache:int' \
+       '--download-result=[Download result]:downresult:(full)' \
+       '--file-allocation=[File allocation]:fileallocation:(trunc prealloc)' \
+       '--summary-interval=[Update Status]:updatestatus:int' \
+       '--max-overall-download-limit=[Max speed download]' \
+       '--show-files[Torrent| Show files]' \
+       '--seed-time=[Torrent| Time seed]:seedtime:int' \
+       '--torrent-file=[Torrent| file]:torrentfile:_files' \
+       '--version[Version]' \
+       '--help[Help]' \
+       '--out=[File name]:filesname:_files' \
+       '--show-files --seed-time=0 --torrent-file=[Torrent]:torrentfile:_files' \
+       '--select-file=1-5,8,9[Torrent| Select file]' \
 }

@@ -19,6 +19,7 @@ read -p "Minute? " min;
 		                         while [ $sec -ge 0 ]; do
 		                                 echo -ne "$hour:$min:$sec\033[0K\r"
 		                                 let "sec=sec-1"
+						 echo "$hour:$min:$sec" > ~/.timer
 		                                 sleep 1
 		                         done
 		                         sec=59
