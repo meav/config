@@ -2,14 +2,47 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/root/.oh-my-zsh"
+export ZSH="/home/meav/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="random"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# ZSH_THEME="robbyrussell"
+
+ZSH_THEME="spaceship"
+SPACESHIP_PROMPT_ORDER=(
+  top
+  user          # Username section
+  dir           # Current directory section
+  git           # Git section (git_branch + git_status)
+  exec_time     # Execution time
+  jobs          # Background jobs indicator
+  line_sep      # Line break
+  vi_mode       # Vi-mode indicator
+  exit_code     # Exit code section
+  char          # Prompt character
+)
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
+SPACESHIP_USER_SHOW=always
+SPACESHIP_USER_PREFIX=' '
+SPACESHIP_GIT_STATUS_PREFIX='·[ '
+SPACESHIP_GIT_STATUS_UNTRACKED='? untracked '
+SPACESHIP_GIT_STATUS_ADDED='+ added '
+SPACESHIP_GIT_STATUS_MODIFIED='! modified '
+SPACESHIP_GIT_STATUS_RENAMED='» renamed '
+SPACESHIP_GIT_STATUS_DELETED='✘ deleted '
+SPACESHIP_GIT_STATUS_STASHED='$ stashed changes '
+SPACESHIP_GIT_STATUS_UNMERGED='= unmerged changes '
+SPACESHIP_GIT_STATUS_AHEAD='⇡ unpushed changes (ahead of remote branch) '
+SPACESHIP_GIT_STATUS_BEHIND='⇣ unpulled changes (behind of remote branch) '
+SPACESHIP_GIT_STATUS_DIVERGED='⇕ diverged changes (diverged with remote branch) '
+SPACESHIP_VI_MODE_PREFIX=' '
+SPACESHIP_EXIT_CODE_SHOW=true
+spaceship_top() {
+  echo $'\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\e[25A'
+}
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -73,6 +106,9 @@ plugins=(zsh-autosuggestions fast-syntax-highlighting globalias)
 
 source $ZSH/oh-my-zsh.sh
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=39"
+ZSH_AUTOSUGGEST_STRATEGY=(history)
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -99,10 +135,12 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-path+=(~/bin)
+KEYTIMEOUT=1
+
+path+=(~/.bin)
 export PATH
 
-cd ~/data
+cd ~/.data
 ls -a --color=always
 
 bindkey -M menuselect 'h' vi-backward-char
@@ -111,9 +149,9 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'o' accept-line
 
-source ~/bin/vi-mode.zsh
-source ~/bin/fzf-completion.zsh
-source ~/bin/zsh-fzf-snippet.zsh
+source ~/.bin/vi-mode.zsh
+source ~/.bin/fzf-completion.zsh
+source ~/.bin/zsh-fzf-snippet.zsh
 
 hash -d vhd=/cygdrive/c/Users/vhd
 
@@ -129,7 +167,7 @@ alias facebook='cmd.exe /c start "" explorer "C:\Users\vhd\Music\centbrowser_3.4
 alias perfmonitor='cmd.exe /c start "" explorer "C:\Users\vhd\Music\PerfMonZip\PerfMon.exe"'
 alias baidu='cmd.exe /c start "" explorer "C:\Users\vhd\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"'
 alias ffmpegguide='echo && (wget -O- -q "https://raw.githubusercontent.com/meav/text/master/FFMPEG/README.md" | cat --number)'
-alias mpv='mpv.com'
+alias mpv='mpv.exe'
 alias yt=youtube-dl.exe
 alias rclone=/cygdrive/c/Users/vhd/Music/rclone-v1.51.0-windows-386/rclone.exe
 alias paint='cmd.exe /c start "" explorer "C:\Windows\system32\mspaint.exe"'
@@ -139,19 +177,20 @@ alias iso='cmd.exe /c start "" explorer "C:\Users\vhd\Music\PowerISO 6.1\PowerIS
 alias goodbyedpi='explorer "C:\Users\vhd\Music\goodbyedpi-0.1.6"'
 alias uninstall='explorer "C:\Program Files\VS Revo Group\Revo Uninstaller Pro\RevoUninPro.exe"'
 alias pdf='explorer "C:\Users\vhd\Music\PDF-XChangeViewerPortable\PDF-XChangeViewerPortable.exe"'
-alias gohttpserver='qrencode -t ANSIUTF8 http://$lanip; gohttpserver.exe --port=80 --theme=green --upload --delete'
+lanip=$(ipconfig | grep -m1 192.168 | awk '{print $14}' | tr -d '\r')
+alias gohttpserver='qrencode -t ANSIUTF8 http://$lanip:80; gohttpserver.exe --port=80 --theme=green --upload --delete'
 alias curl='curl --location --continue-at -'
 alias wget='wget --continue --progress=bar:force:noscroll'
 alias aria2c='aria2c --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5'
+alias vimtext='vim -S ~/.vim/text.vim ~/.data/meav.github.io/index.html'
+alias caddy='caddy.exe -port 80'
+alias jekyll='~/.bin/ruby_2.3.3-jekyll_3.8.7/bin/jekyll.bat'
 alias desktop='explorer "C:\Users\vhd\Music\WW\desktop.vbs"'
 alias quit='rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;exit'
 alias power='rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;explorer "C:\Users\vhd\Music\WW\power.vbs"'
 alias message='explorer "C:\Users\vhd\Music\cygwin\message.cmd"'
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-compdef _mpv mpv.com
+compdef _mpv mpv.exe
 function _mpv {
     _arguments -C -s \
        '--title=[Title]'
@@ -185,9 +224,9 @@ function _wget {
        '--load-cookies[Cookies file]:Cookies:_files' \
        '--help[Help]' \
        '--execute[Command]:Command:_files' \
+       '--no-check-certificate[Fix error certificate]' \
 }
 
-# --split=5 --max-connection-per-server=5 --max-concurrent-downloads=2 --continue --all-proxy=[http://][USER:PASSWORD@]HOST[:PORT] --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M  --version 
 compdef _aria2c aria2c
 function _aria2c {
     _arguments -C -s \
@@ -212,4 +251,12 @@ function _aria2c {
        '--out=[File name]:filesname:_files' \
        '--show-files --seed-time=0 --torrent-file=[Torrent]:torrentfile:_files' \
        '--select-file=1-5,8,9[Torrent| Select file]' \
+}
+
+compdef _caddy caddy.exe
+function _caddy {
+    _arguments -C -s \
+       '-h[Help]' \
+       '-port[Port]:port:int' \
+       '-root[Folder]:Folder:_files' \
 }

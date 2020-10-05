@@ -6,3 +6,4 @@ wget-proxy	 --execute proxy=on --execute http_proxy=proxyhost[:port] --execute h
 aria2c-proxy	 --all-proxy=[http://][USER:PASSWORD@]HOST[:PORT]
 git-list-all-branch(local and remote)	 branch -a
 git-push-all-branch	 push origin --all
+git-push-all-branch-force	 push origin --all -f
