@@ -12,7 +12,8 @@ goto :EOF )
 set /A second=%minute% * 60
 TIMEOUT /T %second%
 msg * /time:120 " "
-cmd.exe /c start "" "C:\Users\a\Music\cmder_mini\bin\nircmdc.exe" win activate process ConEmu.exe
+TIMEOUT /T 30
+powershell (New-Object -ComObject WScript.Shell).SendKeys('{`}')
 echo.
 echo New loop
 goto :while

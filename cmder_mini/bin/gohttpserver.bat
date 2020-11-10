@@ -9,5 +9,5 @@ echo Address is: [92m%_IPaddr%[0m
 echo.
 
 cd C:\Users\a\Desktop
-qrc_windows_386.exe %_IPaddr%
+qrc_windows_386.exe http://%_IPaddr%
 gohttpserver.exe --port 80 --theme=green --upload --delete

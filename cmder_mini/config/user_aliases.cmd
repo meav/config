@@ -4,8 +4,8 @@
 ;= rem In batch mode, jump to the end of the file
 ;= goto:eof
 ;= Add aliases below here
+
 e.=explorer .
-gl
 alias=notepad "C:\Users\a\Music\cmder_mini\config\user_aliases.cmd"
 e=explorer $*
 thtuliem=explorer "C:\Users\a\Music\FreeCommanderXE\ThTuliem.lnk"
