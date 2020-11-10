@@ -26,6 +26,7 @@ SPACESHIP_PROMPT_ORDER=(
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
 SPACESHIP_USER_SHOW=always
+SPACESHIP_USER_COLOR=#edd134
 SPACESHIP_USER_PREFIX=' '
 SPACESHIP_GIT_STATUS_PREFIX='·[ '
 SPACESHIP_GIT_STATUS_UNTRACKED='? untracked '
@@ -39,6 +40,7 @@ SPACESHIP_GIT_STATUS_AHEAD='⇡ unpushed changes (ahead of remote branch) '
 SPACESHIP_GIT_STATUS_BEHIND='⇣ unpulled changes (behind of remote branch) '
 SPACESHIP_GIT_STATUS_DIVERGED='⇕ diverged changes (diverged with remote branch) '
 SPACESHIP_VI_MODE_PREFIX=' '
+SPACESHIP_VI_MODE_COLOR=black
 SPACESHIP_EXIT_CODE_SHOW=true
 spaceship_top() {
   echo $'\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\eD\e[25A'
@@ -166,10 +168,10 @@ alias cent='cmd.exe /c start "" explorer "C:\Users\vhd\Music\centbrowser_3.4.3.3
 alias facebook='cmd.exe /c start "" explorer "C:\Users\vhd\Music\centbrowser_3.4.3.39\Facebook.lnk"'
 alias perfmonitor='cmd.exe /c start "" explorer "C:\Users\vhd\Music\PerfMonZip\PerfMon.exe"'
 alias baidu='cmd.exe /c start "" explorer "C:\Users\vhd\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"'
-alias ffmpegguide='echo && (wget -O- -q "https://raw.githubusercontent.com/meav/text/master/FFMPEG/README.md" | cat --number)'
+alias ffmpegguide='echo && (wget --secure-protocol=TLSv1 -O- -q "https://raw.githubusercontent.com/meav/text/master/FFMPEG/README.md" | cat --number)'
 alias mpv='mpv.exe'
 alias yt=youtube-dl.exe
-alias rclone=/cygdrive/c/Users/vhd/Music/rclone-v1.51.0-windows-386/rclone.exe
+alias -g rclone=/cygdrive/c/Users/vhd/Music/rclone-v1.53.1-windows-386/rclone.exe
 alias paint='cmd.exe /c start "" explorer "C:\Windows\system32\mspaint.exe"'
 alias snipping='cmd.exe /c start "" explorer "C:\Windows\system32\SnippingTool.exe"'
 alias bootice='cmd.exe /c start "" explorer "C:\Users\vhd\Music\BOOTICE_2016.06.17_v1.3.4.0\BOOTICEx86_2016.06.17_v1.3.4.0.exe"'
@@ -179,15 +181,16 @@ alias uninstall='explorer "C:\Program Files\VS Revo Group\Revo Uninstaller Pro\R
 alias pdf='explorer "C:\Users\vhd\Music\PDF-XChangeViewerPortable\PDF-XChangeViewerPortable.exe"'
 lanip=$(ipconfig | grep -m1 192.168 | awk '{print $14}' | tr -d '\r')
 alias gohttpserver='qrencode -t ANSIUTF8 http://$lanip:80; gohttpserver.exe --port=80 --theme=green --upload --delete'
+alias filebrowser='qrencode -t ANSIUTF8 http://$lanip:80; filebrowser.exe -d "C:\Users\vhd\Music\cygwin\cygwin\home\meav\.bin\filebrowser.db"'
 alias curl='curl --location --continue-at -'
-alias wget='wget --continue --progress=bar:force:noscroll'
-alias aria2c='aria2c --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5'
-alias vimtext='vim -S ~/.vim/text.vim ~/.data/meav.github.io/index.html'
+alias wget='wget --no-check-certificate --secure-protocol=TLSv1 --continue --progress=bar:force:noscroll'
+alias aria2c='aria2c --check-certificate=false --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5'
+alias text='tmux source-file ~/.bin/text.tmux'
 alias caddy='caddy.exe -port 80'
 alias jekyll='~/.bin/ruby_2.3.3-jekyll_3.8.7/bin/jekyll.bat'
 alias desktop='explorer "C:\Users\vhd\Music\WW\desktop.vbs"'
 alias quit='rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;exit'
-alias power='rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;explorer "C:\Users\vhd\Music\WW\power.vbs"'
+alias power='echo 0:0:0 > ~/.timer;rm --interactive=never ~/.zsh_history;cp ~/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-VHDX-5.8;rm --interactive=never ~/.zcompdump;explorer "C:\Users\vhd\Music\WW\power.vbs"'
 alias message='explorer "C:\Users\vhd\Music\cygwin\message.cmd"'
 
 compdef _mpv mpv.exe
@@ -202,6 +205,14 @@ function _gohttpserver {
     _arguments -C -s \
        '--help[Help]' \
        '--root=[Folder]:Folder:_files' \
+}
+
+compdef _filebrowser filebrowser.exe
+function _filebrowser {
+    _arguments -C -s \
+       '--help[Help]' \
+       '-d[Database]:Folder:_files' \
+       '-r[Folder]:Folder:_files' \
 }
 
 compdef _curl curl
@@ -220,11 +231,14 @@ function _wget {
     _arguments -C -s \
        '--continue[Continue]' \
        '--progress=[Progress]' \
+       '--secure-protocol=TLSv1[Fix error SSL]' \
        '--output-document=[File name]:Filenames:_files' \
+       '--input-file=[File with list url]:Filenames:_files' \
        '--load-cookies[Cookies file]:Cookies:_files' \
        '--help[Help]' \
        '--execute[Command]:Command:_files' \
        '--no-check-certificate[Fix error certificate]' \
+       '--limit-rate=m[Limit speed]' \
 }
 
 compdef _aria2c aria2c
@@ -241,6 +255,7 @@ function _aria2c {
        '--disk-cache=[Disk cacke]:diskcache:int' \
        '--download-result=[Download result]:downresult:(full)' \
        '--file-allocation=[File allocation]:fileallocation:(trunc prealloc)' \
+       '--check-certificate=[Check certificate]:checkcertificate:(true false)' \
        '--summary-interval=[Update Status]:updatestatus:int' \
        '--max-overall-download-limit=[Max speed download]' \
        '--show-files[Torrent| Show files]' \
