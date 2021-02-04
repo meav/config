@@ -1,0 +1,7 @@
+:while
+del /F "C:\Users\Administrator\Music\Timer\HourglassPortable.config"
+start "" /MIN "C:\Users\Administrator\Music\Timer\focus.bat"
+"C:\Users\Administrator\Music\Timer\HourglassPortable.exe" --always-on-top off --full-screen off --prompt-on-exit on --show-in-notification-area off --do-not-keep-awake off --show-time-elapsed off --loop-timer off --pop-up-when-expired on --close-when-expired on --shut-down-when-expired off --theme gray --sound none --loop-sound off --open-saved-timers off --window-title left --window-state normal --lock-interface off --window-bounds 300,150,350,150
+"C:\Users\Administrator\Music\Timer\HourglassPortable.exe" --always-on-top on --full-screen off --prompt-on-exit on --show-in-notification-area off --do-not-keep-awake off --show-time-elapsed off --loop-timer off --pop-up-when-expired on --close-when-expired on --shut-down-when-expired off --theme purple --sound none --loop-sound off --open-saved-timers off --window-title left --window-state normal --lock-interface off --window-bounds 20,20,3500,1500 150s
+"C:\Users\Administrator\Music\Timer\HourglassPortable.exe" --always-on-top on --full-screen off --prompt-on-exit on --show-in-notification-area off --do-not-keep-awake off --show-time-elapsed off --loop-timer off --pop-up-when-expired on --close-when-expired on --shut-down-when-expired off --theme green --sound none --loop-sound off --open-saved-timers off --window-title left --window-state normal --lock-interface off --window-bounds 20,20,3500,1500 30s
+goto :while
