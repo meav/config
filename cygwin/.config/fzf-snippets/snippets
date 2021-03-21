@@ -1,9 +1,0 @@
-cmd /k "C:\Users\vhd\Music\cygwin\cygwin\home\meav\.bin\mpv.com"
-mpv.com sd	 --ytdl-format="bestvideo[height<=?500][fps<=?30][vcodec!=?vp9]+bestaudio/best[height<=?500]"
-winpath	 cygpath -t windows
-curl-proxy	 --proxy [protocol://][user:password@]proxyhost[:port]
-wget-proxy	 --execute proxy=on --execute http_proxy=proxyhost[:port] --execute https_proxy=proxyhost[:host] --execute ftp_proxy=proxyhost[:port] --execute proxy-user=user --execute proxy-password=password
-aria2c-proxy	 --all-proxy=[http://][USER:PASSWORD@]HOST[:PORT]
-git-list-all-branch(local and remote)	 branch -a
-git-push-all-branch	 push origin --all
-git-push-all-branch-force	 push origin --all -f

@@ -1,6 +1,0 @@
-curl,git,rsync,unzip,vim,wget,zip,zsh,aria2,tmux,qrencode,tree,cygutils-extra,fzf
-mintty --nopin --Title Message --Border void --exec "%CYGWIN_ROOT%\home\meav\.bin\message.sh" -
-set "USERNAME=meav"
-set SHELL=/bin/tmux
-set LC_ALL=en_US.UTF-8
-start "" "C:\Users\vhd\Music\cygwin\tmux.lnk"
