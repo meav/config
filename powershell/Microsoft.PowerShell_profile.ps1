@@ -1,5 +1,8 @@
 # Variable
-Set-Variable SCOOP C:\Users\VHDX\Music\scoop\persist
+Set-Variable CONFIG C:\Users\VHDX\Music\config
+
+# PSreadline history path
+Set-PSReadLineOption -HistorySavePath C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt
 
 # PSreadline last character
 Set-PSReadLineOption -prompttext "`e[1;32m> ", '> '
@@ -46,12 +49,13 @@ function cuesplitter { explorer "C:\Users\VHDX\Music\MedievalCUESplitterPortable
 function baidu { explorer "C:\Users\Administrator\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"}
 function ezaudioconverter { explorer "C:\Users\VHDX\Music\EZ CD Audio Converter\EZCDPortable.exe"}
 function picard { explorer "C:\Users\VHDX\Music\PicardPortable\PicardPortable.exe"}
-function neovim { nvim "-new_console:n" -n -i NONE -u C:\Users\VHDX\Music\scoop\persist\nvim\init.vim $args}
+function neovim { nvim "-new_console:n" -n -i NONE -u C:\Users\VHDX\Music\config\nvim\init.vim $args}
 function autosub { python "C:\Users\VHDX\Music\scoop\apps\python27\2.7.18\Scripts\autosub_app.py" $args}
 function cent { explorer "C:\Users\VHDX\Music\centbrowser_3.4.3.39_portable\chrome.exe"}
 function facebook { explorer "D:\Users\a\Music\centbrowser_4.1.7.182\Facebook.lnk"}
 function goodbyedpi { explorer "C:\Users\VHDX\Music\goodbyedpi-0.1.6"}
 function perfmon { explorer "C:\Users\VHDX\Music\PerfMonZip\PerfMon.exe"}
-function timer { explorer "C:\Users\VHDX\Music\Timer\Timer.vbs"}
+function timer { explorer "C:\Users\VHDX\Music\config\Timer\Timer.vbs"}
 function desktop { explorer "D:\Users\a\Music\WW\desktop.vbs"}
-function power { explorer "D:\Users\a\Music\WW\power.vbs"}
+function newhistory { Remove-Item -Path C:\Users\VHDX\Music\config\powershell\ConsoleHost_history_base.txt && Copy-Item C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt -Destination C:\Users\VHDX\Music\config\powershell\ConsoleHost_history_base.txt && neovim C:\Users\VHDX\Music\config\powershell\ConsoleHost_history_base.txt}
+function power { Remove-Item -Path C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt && Copy-Item C:\Users\VHDX\Music\config\powershell\ConsoleHost_history_base.txt -Destination C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt && explorer "D:\Users\a\Music\WW\power.vbs"}
