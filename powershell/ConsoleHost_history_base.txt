@@ -3,7 +3,7 @@ set-executionpolicy remotesigned -scope currentuser
 @(Get-ChildItem -Recurse -Filter *.xml ) | %{.\Install-ConEmuTheme.ps1 -ConfigPath C:\Users\VHDX\Music\scoop\persist\conemu\ConEmu\ConEmu.xml -Operation Add -ThemePathOrName $_.FullName}
 scoop install neovim
 scoop cache rm *
-explorer $SCOOP
+explorer $CONFIG
 notepad
 ffmpeg -f mpegts -i 000_hls_output.ts -c copy output.mp4
 timer
@@ -25,6 +25,9 @@ python "C:\Users\VHDX\Music\scoop\apps\python27\2.7.18\Scripts\autosub_app.py" .
 mpv .\2.mp4 --sub-files=2.srt --sub-files=2-one.srt --secondary-sid=auto
 aria2c --check-certificate=false --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5 --show-files --seed-time=0 --torrent-file='.torrent'
 aria2c --check-certificate=false --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5 --select-file=1 --seed-time=0 --torrent-file=".torrent"
+wget --continue --progress=bar:force:noscroll
+newhistory
+neovim C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt
 neovim $PROFILE
 Get-PSReadLineOption
 ffmpeg -i .\Video.mp4 -i .\Audio.mp4 -c copy -map "0:v:0" -map "1:a:0" output.mkv
@@ -40,9 +43,9 @@ git restore --staged .
 git commit -m "Timer title = Current time"
 git config --global user.email "milanistavietnam@gmail.com"
 git config --global user.name "meav"
+git push origin --all
 exit
 power
 cent
 facebook
-newhistory
 
