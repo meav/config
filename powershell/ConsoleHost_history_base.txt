@@ -1,9 +1,11 @@
 $psversiontable.psversion.major # should be >= 5.0
 set-executionpolicy remotesigned -scope currentuser
+[enum]::GetValues([System.ConsoleColor]) | Foreach-Object {Write-Host $_ -ForegroundColor $_}
 @(Get-ChildItem -Recurse -Filter *.xml ) | %{.\Install-ConEmuTheme.ps1 -ConfigPath C:\Users\VHDX\Music\scoop\persist\conemu\ConEmu\ConEmu.xml -Operation Add -ThemePathOrName $_.FullName}
 scoop install neovim
 scoop cache rm *
 explorer $CONFIG
+cd $CONFIG
 notepad
 ffmpeg -f mpegts -i 000_hls_output.ts -c copy output.mp4
 timer
