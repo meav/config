@@ -5,6 +5,7 @@ set rtp+=~/music/config/nvim/plugins/vim-devicons
 set rtp+=~/music/config/nvim/plugins/vim-surround
 set rtp+=~/music/config/nvim/plugins/vim-venu
 set rtp+=~/music/config/nvim/plugins/vim-ps1
+set rtp+=~/music/config/nvim/plugins/vim-toml
 
 " Encoding
 set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
