@@ -1,0 +1,58 @@
+add_newline = true
+
+format = """
+$env_var\
+$time\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$cmd_duration\
+$jobs\
+$line_break\
+$status\
+$character"""
+
+[env_var]
+variable = "TOPPROMPT"
+format = "[$env_value]($style)"
+
+[time]
+disabled = false
+format = " [$time]($style) "
+time_format = "%I:%M"
+
+[directory]
+truncation_symbol = "…/"
+format = "in [$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+
+[git_state]
+
+[git_status]
+format = '([\[ $all_status$ahead_behind \]]($style) )'
+conflicted = "${count} Conflicted - "
+ahead = "${count} commit to push"
+behind = "${count} commit to pull"
+diverged = "Diverged: ${ahead_count} ahead ${behind_count} behind"
+untracked = "${count} Untracked - "
+stashed = "${count} Stashed - "
+modified = "${count} Modified - "
+staged = "${count} Staged - "
+renamed = "${count} Renamed - "
+deleted = "${count} Deleted - "
+
+[cmd_duration]
+
+[jobs]
+threshold = 0
+
+[line_break]
+
+[status]
+disabled = false
+
+[character]
+success_symbol = " [](bold green)"
+error_symbol = " [](bold green)"

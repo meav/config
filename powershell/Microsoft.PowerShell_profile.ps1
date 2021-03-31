@@ -31,20 +31,25 @@ Set-PSReadLineOption -Colors @{
 # PSreadline history path
 Set-PSReadLineOption -HistorySavePath C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt
 
-# PSreadline last character
-Set-PSReadLineOption -prompttext "`e[1;32m> ", '> '
-
 # Simple prompt
-function prompt {
-$(echo "`n") +
-$(topprompt) + 
-    $(if (Test-Path variable:/PSDebugContext) { '[DBG]: ' }
-      else { '' }) + "`e[31mPS`e[0m " + $(Get-Location) +
-        $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
-}
+# function prompt {
+# $(echo "`n") +
+# $(topprompt) + 
+#     $(if (Test-Path variable:/PSDebugContext) { '[DBG]: ' }
+#       else { '' }) + "`e[31mPS`e[0m " + $(Get-Location) +
+#         $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
+# }
+
+# Starship
+Invoke-Expression (&starship init powershell)
+
+# PSreadline last character
+Set-PSReadLineOption -prompttext "`e[1;32m ", ' '
 
 # Top prompt
 function topprompt { echo "`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`eD`e[25A"}
+
+$ENV:TOPPROMPT = $(topprompt)
 
 # PSreadline vi-mode
 Set-PSReadlineOption -EditMode vi
