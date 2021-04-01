@@ -1,3 +1,24 @@
+# Posh-with
+Import-Module posh-with
+function global:Write-WithPrompt()
+{
+    param(
+        [string]
+        $command
+    )
+    $(topprompt)
+    Write-Host " With " -ForegroundColor Red -NoNewline
+
+    $currentPath = (get-location).Path.replace($home, "~")
+    $idx = $currentPath.IndexOf("::")
+    if ($idx -gt -1) { $currentPath = $currentPath.Substring($idx + 2) }
+    $host.UI.RawUI.WindowTitle=$currentPath
+    Write-Host "$currentPath " -NoNewline
+
+    Write-Host "$command " -ForegroundColor Yellow -NoNewline
+    Write-Host " " -ForegroundColor Green -NoNewline
+}
+
 # Variable
 Set-Variable CONFIG C:\Users\VHDX\Music\config
 
