@@ -43,7 +43,7 @@ git clone https://github.com/meav/config
 git add .
 git status
 git log
-git diff 03ecaa535738e500bc9b65894d1569808c4ef203
+git diff --cached
 git restore --staged .
 git commit -m "Timer title = Current time"
 git config --global user.email "milanistavietnam@gmail.com"
