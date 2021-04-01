@@ -31,17 +31,17 @@ format = "in [$path]($style)[$read_only]($read_only_style) "
 [git_state]
 
 [git_status]
-format = '([\[ $all_status$ahead_behind \]]($style) )'
-conflicted = "${count} Conflicted - "
-ahead = "${count} commit to push"
-behind = "${count} commit to pull"
-diverged = "Diverged: ${ahead_count} ahead ${behind_count} behind"
-untracked = "${count} Untracked - "
-stashed = "${count} Stashed - "
-modified = "${count} Modified - "
-staged = "${count} Staged - "
-renamed = "${count} Renamed - "
-deleted = "${count} Deleted - "
+format = '([·$all_status$ahead_behind]($style) )'
+conflicted = "${count} Conflicted ·"
+ahead = " ${count} commit to push ·"
+behind = " ${count} commit to pull ·"
+diverged = " Diverged: ${ahead_count} ahead ${behind_count} behind ·"
+untracked = " ${count} Untracked ·"
+stashed = " ${count} Stashed ·"
+modified = " ${count} Modified ·"
+staged = " ${count} Staged ·"
+renamed = " ${count} Renamed ·"
+deleted = " ${count} Deleted ·"
 
 [cmd_duration]
 
