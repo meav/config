@@ -1,56 +1,5 @@
-# Posh-with
-Import-Module posh-with
-function global:Write-WithPrompt()
-{
-    param(
-        [string]
-        $command
-    )
-    $(topprompt)
-    Write-Host " With " -ForegroundColor Red -NoNewline
-
-    $currentPath = (get-location).Path.replace($home, "~")
-    $idx = $currentPath.IndexOf("::")
-    if ($idx -gt -1) { $currentPath = $currentPath.Substring($idx + 2) }
-    $host.UI.RawUI.WindowTitle=$currentPath
-    Write-Host "$currentPath " -NoNewline
-
-    Write-Host "$command " -ForegroundColor Yellow -NoNewline
-    Write-Host " " -ForegroundColor Green -NoNewline
-}
-
 # Variable
 Set-Variable CONFIG C:\Users\VHDX\Music\config
-
-# Powershell color
-$host.ui.rawui.ForegroundColor = "Green"
-$host.ui.rawui.BackgroundColor = "Black"
-$Host.PrivateData.ErrorForegroundColor = "DarkRed"
-$Host.PrivateData.WarningForegroundColor = "DarkYellow"
-$Host.PrivateData.DebugForegroundColor = "DarkYellow"
-$Host.PrivateData.VerboseForegroundColor = "DarkYellow"
-$Host.PrivateData.ProgressForegroundColor = "Yellow"
-$Host.PrivateData.ProgressBackgroundColor = "DarkGray"
-
-# PSreadline color
-Set-PSReadLineOption -Colors @{
-  Command = 'DarkBlue'
-  Comment = 'Yellow'
-  ContinuationPrompt = 'Green'
-  Emphasis = 'DarkCyan'
-  Error = 'DarkRed'
-  Keyword = 'DarkMagenta'
-  Member = 'White'
-  Number = 'White'
-  Operator = 'Green'
-  Parameter = 'Blue'
-  String = 'DarkGreen'
-  Type = 'DarkMagenta'
-  Variable = 'Red'
-}
-
-# PSreadline history path
-Set-PSReadLineOption -HistorySavePath C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt
 
 # Simple prompt
 # function prompt {
@@ -93,6 +42,57 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineOption -Colors @{ InlinePrediction = "Yellow"}
 Set-PSReadlineKeyHandler -Chord o -ViMode Command -Function AcceptSuggestion
 Set-PSReadLineKeyHandler -Chord "Ctrl+o" -Function ForwardWord
+
+# PSreadline history path
+Set-PSReadLineOption -HistorySavePath C:\Users\VHDX\Documents\PowerShell\ConsoleHost_history.txt
+
+# Posh-with
+Import-Module posh-with
+function global:Write-WithPrompt()
+{
+    param(
+        [string]
+        $command
+    )
+    $(topprompt)
+    Write-Host " With " -ForegroundColor Red -NoNewline
+
+    $currentPath = (get-location).Path.replace($home, "~")
+    $idx = $currentPath.IndexOf("::")
+    if ($idx -gt -1) { $currentPath = $currentPath.Substring($idx + 2) }
+    $host.UI.RawUI.WindowTitle=$currentPath
+    Write-Host "$currentPath " -NoNewline
+
+    Write-Host "$command " -ForegroundColor Yellow -NoNewline
+    Write-Host " " -ForegroundColor Green -NoNewline
+}
+
+# Powershell color
+$host.ui.rawui.ForegroundColor = "Green"
+$host.ui.rawui.BackgroundColor = "Black"
+$Host.PrivateData.ErrorForegroundColor = "DarkRed"
+$Host.PrivateData.WarningForegroundColor = "DarkYellow"
+$Host.PrivateData.DebugForegroundColor = "DarkYellow"
+$Host.PrivateData.VerboseForegroundColor = "DarkYellow"
+$Host.PrivateData.ProgressForegroundColor = "Yellow"
+$Host.PrivateData.ProgressBackgroundColor = "DarkGray"
+
+# PSreadline color
+Set-PSReadLineOption -Colors @{
+  Command = 'DarkBlue'
+  Comment = 'Yellow'
+  ContinuationPrompt = 'Green'
+  Emphasis = 'DarkCyan'
+  Error = 'DarkRed'
+  Keyword = 'DarkMagenta'
+  Member = 'White'
+  Number = 'White'
+  Operator = 'Green'
+  Parameter = 'Blue'
+  String = 'DarkGreen'
+  Type = 'DarkMagenta'
+  Variable = 'Red'
+}
 
 # Simple alias
 Set-Alias -Name rclone -Value C:\Users\VHDX\Music\rclone-v1.54.0-windows-386\rclone.exe
