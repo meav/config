@@ -97,9 +97,18 @@ Set-PSReadLineOption -Colors @{
   Variable = 'Red'
 }
 
+# ghfs
+function gohttpfileserver {
+$localIpAddress=((ipconfig | findstr [0-9].\.)[0]).Split()[-1]
+Write-Host "`n"
+Write-Host $localIpAddress -ForegroundColor Green
+C:\Users\VHDX\Music\ghfs\qrc_windows_386.exe -i http://$localIpAddress
+C:\Users\VHDX\Music\ghfs\ghfs.exe --root C:\Users\VHDX\Desktop --default-sort /n --global-upload --global-mkdir --global-delete --global-archive --global-cors --listen-plain 80 --error-log - --hide Outlook.lnk --hide Gmail.lnk --hide EVKey32.lnk --hide Power.lnk --hide desktop.ini --hide Thumbs.db
+}
+
 # Simple alias
 Set-Alias -Name rclone -Value C:\Users\VHDX\Music\rclone-v1.54.0-windows-386\rclone.exe
-function ghfs { Start-Process "C:\Users\VHDX\Music\ghfs\ghfs.bat"}
+Set-Alias -Name ghfs -Value gohttpfileserver
 function iso { explorer "C:\Users\VHDX\Music\PowerISO 6.1\PowerISOPortable.exe"}
 function cuesplitter { explorer "C:\Users\VHDX\Music\MedievalCUESplitterPortable\MedievalCUESplitterPortable.exe"}
 function baidu { explorer "C:\Users\Administrator\AppData\Roaming\baidu\BaiduNetdisk\BaiduNetdisk.exe"}
