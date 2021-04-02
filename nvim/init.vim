@@ -12,6 +12,9 @@ set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 set termencoding=utf-8
 set encoding=utf-8
 
+" Line number netrw
+let g:netrw_bufsettings = 'noma nomod nu nowrap ro nobl'
+
 " Venu
 let s:menu = venu#create('Venu')
 """
