@@ -67,6 +67,9 @@ function global:Write-WithPrompt()
     Write-Host " " -ForegroundColor Green -NoNewline
 }
 
+# Posh-git
+Import-Module posh-git
+
 # Powershell color
 $host.ui.rawui.ForegroundColor = "Green"
 $host.ui.rawui.BackgroundColor = "Black"
