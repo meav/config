@@ -1,8 +1,11 @@
 $psversiontable.psversion.major # should be >= 5.0
+with C:\Users\VHDX\Music\ruby_2.3.3-jekyll_3.8.7\bin\jekyll.bat build
 > -title
 > --ytdl-format="bestvideo[height<=?500][fps<=?30][vcodec!=?vp9]+bestaudio/best[height<=?500]"
 with mpv -title
-with C:\Users\VHDX\Music\ruby_2.3.3-jekyll_3.8.7\bin\jekyll.bat build
+:exit
+:power
+:q
 set-executionpolicy remotesigned -scope currentuser
 [enum]::GetValues([System.ConsoleColor]) | Foreach-Object {Write-Host $_ -ForegroundColor $_}
 @(Get-ChildItem -Recurse -Filter *.xml ) | %{.\Install-ConEmuTheme.ps1 -ConfigPath C:\Users\VHDX\Music\scoop\persist\conemu\ConEmu\ConEmu.xml -Operation Add -ThemePathOrName $_.FullName}

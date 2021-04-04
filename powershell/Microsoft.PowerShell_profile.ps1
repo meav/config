@@ -54,16 +54,17 @@ function global:Write-WithPrompt()
         [string]
         $command
     )
-    $(topprompt)
     Write-Host " With " -ForegroundColor Red -NoNewline
-
-    $currentPath = (get-location).Path.replace($home, "~")
-    $idx = $currentPath.IndexOf("::")
-    if ($idx -gt -1) { $currentPath = $currentPath.Substring($idx + 2) }
-    $host.UI.RawUI.WindowTitle=$currentPath
-    Write-Host "$currentPath " -NoNewline
-
-    Write-Host "$command " -ForegroundColor Yellow -NoNewline
+    $prompt = $(prompt)
+    Write-Host "$prompt" -NoNewLine
+#
+#    $currentPath = (get-location).Path.replace($home, "~")
+#    $idx = $currentPath.IndexOf("::")
+#    if ($idx -gt -1) { $currentPath = $currentPath.Substring($idx + 2) }
+#    $host.UI.RawUI.WindowTitle=$currentPath
+#    Write-Host "$currentPath " -NoNewline
+#
+    Write-Host "$command " -ForegroundColor Green -NoNewline
     Write-Host " " -ForegroundColor Green -NoNewline
 }
 
