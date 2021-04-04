@@ -23,7 +23,7 @@ let s:help = venu#create('Help')
 call venu#addItem(s:help, 'Surround', 'help Surround')
 call venu#addItem(s:menu, 'Help', s:help)
 """
-call venu#addItem(s:menu, 'List Plugins', '!dir "C:\Users\VHDX\Music\scoop\persist\nvim\plugins"')
+call venu#addItem(s:menu, 'List Plugins', '!dir "C:\Users\VHDX\Music\config\nvim\plugins"')
 """
 call venu#register(s:menu)
 
