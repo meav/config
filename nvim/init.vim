@@ -112,3 +112,6 @@ endfunction
 function! LightlineDate()
   return strftime('%A, %d/%m/%Y')
 endfunction
+
+" Key map
+nnoremap <C-Space> <C-w>
