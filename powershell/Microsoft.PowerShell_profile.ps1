@@ -54,9 +54,10 @@ function global:Write-WithPrompt()
         [string]
         $command
     )
-    Write-Host " With " -ForegroundColor Red -NoNewline
-    $prompt = $(prompt)
-    Write-Host "$prompt" -NoNewLine
+    Write-Host " Posh-With" -ForegroundColor Red -NoNewline
+    $withprompt = $(prompt).substring(1) -replace ""
+    $withprompt = $withprompt -replace ".$"
+    Write-Host $withprompt -NoNewLine
 #
 #    $currentPath = (get-location).Path.replace($home, "~")
 #    $idx = $currentPath.IndexOf("::")
@@ -64,8 +65,8 @@ function global:Write-WithPrompt()
 #    $host.UI.RawUI.WindowTitle=$currentPath
 #    Write-Host "$currentPath " -NoNewline
 #
-    Write-Host "$command " -ForegroundColor Green -NoNewline
-    Write-Host " " -ForegroundColor Green -NoNewline
+    Write-Host $command -ForegroundColor Green -NoNewline
+    Write-Host "  " -ForegroundColor Green -NoNewline
 }
 
 # Posh-git
