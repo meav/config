@@ -8,6 +8,6 @@ do {
 }
 until ($name -eq "timer" -or $name -eq "quit")
 if ($name -eq "timer") {explorer C:\Users\VHDX\Music\config\Timer\Timer.vbs
-                        cmd /c 'pwsh.exe -new_console:t:"pwsh":d:C:\Users\VHDX\Desktop'
+                        exit
 		       }
-  else {cmd /c 'pwsh.exe -new_console:t:"pwsh":d:C:\Users\VHDX\Desktop'}
+  else {exit}
