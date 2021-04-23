@@ -30,7 +30,7 @@ iso
 rclone sync --update --ignore-size --progress -v --dry-run "E:\Van ban\Nhac\" "box:/milanistavietnam/Nhac/"
 scoop bucket add versions
 pip install autosub
-python "C:\Users\VHDX\Music\scoop\apps\python27\2.7.18\Scripts\autosub_app.py" .\2.mp4 -S en -D en
+autosub .\2.mp4 -S en -D en
 mpv .\2.mp4 --sub-files=2.srt --sub-files=2-one.srt --secondary-sid=auto
 aria2c --check-certificate=false --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5 --show-files --seed-time=0 --torrent-file='.torrent'
 aria2c --check-certificate=false --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5 --select-file=1 --seed-time=0 --torrent-file=".torrent"
