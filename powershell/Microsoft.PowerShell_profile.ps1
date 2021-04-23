@@ -127,7 +127,7 @@ function baidu { explorer "C:\Users\Administrator\AppData\Roaming\baidu\BaiduNet
 function ezaudioconverter { explorer "C:\Users\VHDX\Music\EZ CD Audio Converter\EZCDPortable.exe"}
 function picard { explorer "C:\Users\VHDX\Music\PicardPortable\PicardPortable.exe"}
 function neovim { nvim "-new_console:n" -n -i NONE -u C:\Users\VHDX\Music\config\nvim\init.vim $args}
-function autosub { python "C:\Users\VHDX\Music\scoop\apps\python27\2.7.18\Scripts\autosub_app.py" $args}
+function autosub { python "C:\Users\VHDX\scoop\apps\python27\2.7.18\Scripts\autosub_app.py" $args}
 function cent { explorer "C:\Users\VHDX\Music\centbrowser_3.4.3.39_portable\chrome.exe"}
 function facebook { explorer "D:\Users\a\Music\centbrowser_4.1.7.182\Facebook.lnk"}
 function goodbyedpi { explorer "C:\Users\VHDX\Music\goodbyedpi-0.1.6"}
