@@ -105,7 +105,7 @@ $localIpAddress=((ipconfig | findstr [0-9].\.)[0]).Split()[-1]
 Write-Host "`n"
 Write-Host $localIpAddress -ForegroundColor Green
 qrc_windows_386.exe -i http://$localIpAddress
-ghfs.exe --root C:\Users\VHDX\Desktop --default-sort /n --global-upload --global-mkdir --global-delete --global-archive --global-cors --listen-plain 80 --error-log - --hide Outlook.lnk --hide Gmail.lnk --hide EVKey32.lnk --hide Power.lnk --hide desktop.ini --hide Thumbs.db --theme "C:\Users\VHDX\Music\config\single binary\Customtheme.zip"
+ghfs.exe --root C:\Users\VHDX\Desktop --default-sort /n --global-upload --global-mkdir --global-delete --global-archive --global-cors --listen-plain 80 --error-log - --theme "C:\Users\VHDX\Music\config\single binary\Customtheme.zip"
 }
 
 # browsersync
