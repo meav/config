@@ -23,6 +23,10 @@ let s:help = venu#create('Help')
 call venu#addItem(s:help, 'Surround', 'help Surround')
 call venu#addItem(s:menu, 'Help', s:help)
 """
+let s:snippet = venu#create('Snippets')
+call venu#addItem(s:snippet, 'Snippets', 'exe "normal ivoz"|exe "normal ovn-z<>"')
+call venu#addItem(s:menu, 'Snippets', s:snippet)
+"""
 call venu#addItem(s:menu, 'List Plugins', '!dir "C:\Users\VHDX\Music\config\nvim\plugins"')
 """
 call venu#register(s:menu)
