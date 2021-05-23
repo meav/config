@@ -30,6 +30,8 @@ function update_status_line()
         atsl(mp.get_property_osd("volume", -1))
         atsl("%)")
 
+    atsl("\n")
+
     demuxer_cache = mp.get_property_native("demuxer-cache-state", {})
 	if demuxer_cache["fw-bytes"] then
 		demuxer_cache = demuxer_cache["fw-bytes"] -- returns bytes
@@ -39,7 +41,7 @@ function update_status_line()
 	demuxer_secs = mp.get_property_number("demuxer-cache-duration", 0)
 	if demuxer_cache + demuxer_secs > 0 then
 	r = utils.format_bytes_humanized(demuxer_cache)
-	atsl(" (Cache: ")
+	atsl("Cache: ")
 	atsl(r)
 	atsl(" = ")
         atsl(string.format("%.1f", demuxer_secs))
@@ -48,7 +50,7 @@ function update_status_line()
 	if speed > 0 then
 	r = utils.format_bytes_humanized(speed)
 	atsl(r)
-	atsl("/s)")
+	atsl("/s")
 	end
 	end
 

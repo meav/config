@@ -13,20 +13,19 @@ local utils = require 'mp.utils'
 -- Options
 local o = {
     -- Default key bindings
-    key_oneshot = "KP_INS",
-    key_toggle = "KP9",
+    key_oneshot = "i",
+    key_toggle = "KP3",
     key_page_1 = "1",
     key_page_2 = "2",
     key_page_3 = "3",
     key_page_4 = "4",
     key_page_5 = "5",
-    key_page_6 = "6",
     -- For pages which support scrolling
     key_scroll_up = "UP",
     key_scroll_down = "DOWN",
     scroll_lines = 1,
 
-    duration = 5,
+    duration = 4,
     redraw_delay = 1,                -- acts as duration in the toggling case
     ass_formatting = true,
     persistent_overlay = false,      -- whether the stats can be overwritten by other output
@@ -178,17 +177,6 @@ local function has_vo_window()
 end
 
 
-local function has_ansi()
-    local is_windows = type(package) == 'table'
-        and type(package.config) == 'string'
-        and package.config:sub(1, 1) == '\\'
-    if is_windows then
-        return os.getenv("ANSICON")
-    end
-    return true
-end
-
-
 -- Generate a graph from the given values.
 -- Returns an ASS formatted vector drawing as string.
 --
@@ -319,6 +307,8 @@ local function append_perfdata(s, dedicated_page)
         return format("{\\b%d}%02d%%{\\b0}", w, i * 100)
     end
 
+    -- ensure that the fixed title is one element and every scrollable line is
+    -- also one single element.
     s[#s+1] = format("%s%s%s%s{\\fs%s}%s{\\fs%s}",
                      dedicated_page and "" or o.nl, dedicated_page and "" or o.indent,
                      b("Frame Timings:"), o.prefix_sep, o.font_size * 0.66,
@@ -339,7 +329,9 @@ local function append_perfdata(s, dedicated_page)
                                  o.font, o.prefix_sep, o.prefix_sep, pass["desc"])
 
                 if o.plot_perfdata and o.use_ass then
-                    s[#s+1] = generate_graph(pass["samples"], pass["count"],
+                    -- use the same line that was already started for this iteration
+                    s[#s] = s[#s] ..
+                              generate_graph(pass["samples"], pass["count"],
                                              pass["count"], pass["peak"],
                                              pass["avg"], 0.9, 0.25)
                 end
@@ -435,6 +427,10 @@ local function append_filters(s, prop, prefix)
             n = n .. " (disabled)"
         end
 
+        if f.label ~= nil then
+            n = "@" .. f.label .. ": " .. n
+        end
+
         local p = {}
         for key,value in pairs(f.params) do
             p[#p+1] = key .. "=" .. value
@@ -474,16 +470,28 @@ local function add_file(s)
         append_property(s, "media-title", {prefix="Title:"})
     end
 
-    local fs = append_property(s, "file-size", {prefix="Size:"})
-    append_property(s, "file-format", {prefix="Format/Protocol:", nl=fs and "" or o.nl})
+    local editions = mp.get_property_number("editions")
+    local edition = mp.get_property_number("current-edition")
+    local ed_cond = (edition and editions > 1)
+    if ed_cond then
+        append_property(s, "edition-list/" .. tostring(edition) .. "/title",
+                       {prefix="Edition:"})
+        append_property(s, "edition-list/count",
+                        {prefix="(" .. tostring(edition + 1) .. "/", suffix=")", nl="",
+                         indent=" ", prefix_sep=" ", no_prefix_markup=true})
+    end
 
     local ch_index = mp.get_property_number("chapter")
     if ch_index and ch_index >= 0 then
-        append_property(s, "chapter-list/" .. tostring(ch_index) .. "/title", {prefix="Chapter:"})
+        append_property(s, "chapter-list/" .. tostring(ch_index) .. "/title", {prefix="Chapter:",
+                        nl=ed_cond and "" or o.nl})
         append_property(s, "chapter-list/count",
                         {prefix="(" .. tostring(ch_index + 1) .. "/", suffix=")", nl="",
                          indent=" ", prefix_sep=" ", no_prefix_markup=true})
     end
+
+    local fs = append_property(s, "file-size", {prefix="Size:"})
+    append_property(s, "file-format", {prefix="Format/Protocol:", nl=fs and "" or o.nl})
 
     local demuxer_cache = mp.get_property_native("demuxer-cache-state", {})
     if demuxer_cache["fw-bytes"] then
@@ -542,8 +550,14 @@ local function add_video(s)
         append(s, r["h"], {prefix="x", nl="", indent=" ", prefix_sep=" ", no_prefix_markup=true})
     end
     append_property(s, "current-window-scale", {prefix="Window Scale:"})
-    append(s, format("%.2f", r["aspect"]), {prefix="Aspect Ratio:"})
+    if r["aspect"] ~= nil then
+        append(s, format("%.2f", r["aspect"]), {prefix="Aspect Ratio:"})
+    end
     append(s, r["pixelformat"], {prefix="Pixel Format:"})
+    if r["hw-pixelformat"] ~= nil then
+        append(s, r["hw-pixelformat"], {prefix_sep="[", nl="", indent=" ",
+                suffix="]"})
+    end
 
     -- Group these together to save vertical space
     local prim = append(s, r["primaries"], {prefix="Primaries:"})
@@ -582,6 +596,7 @@ local function add_audio(s)
     append_filters(s, "af", "Filters:")
 end
 
+
 -- Determine whether ASS formatting shall/can be used and set formatting sequences
 local function eval_ass_formatting()
     o.use_ass = o.ass_formatting and has_vo_window()
@@ -597,148 +612,14 @@ local function eval_ass_formatting()
         o.nl = o.no_ass_nl
         o.indent = o.no_ass_indent
         o.prefix_sep = o.no_ass_prefix_sep
-        if not has_ansi() then
-            o.b1 = ""
-            o.b0 = ""
-            o.it1 = ""
-            o.it0 = ""
-        else
-            o.b1 = o.no_ass_b1
-            o.b0 = o.no_ass_b0
-            o.it1 = o.no_ass_it1
-            o.it0 = o.no_ass_it0
-        end
+        o.b1 = o.no_ass_b1
+        o.b0 = o.no_ass_b0
+        o.it1 = o.no_ass_it1
+        o.it0 = o.no_ass_it0
     end
 end
-
-local function add_file_custom(s)
-    append(s, "", {prefix="File:", nl="", indent=""})
-    append_property(s, "filename", {prefix_sep="", nl="", indent=""})
-    if not (mp.get_property_osd("filename") == mp.get_property_osd("media-title")) then
-        append_property(s, "media-title", {prefix="Title:"})
-    end
-
-    local fs = append_property(s, "file-size", {prefix="Size:"})
-    append_property(s, "file-format", {prefix="Format/Protocol:", nl=fs and "" or o.nl})
-	append_property(s, "time-pos", {prefix="Progress:", suffix="  +"}) 
-    append_property(s, "time-remaining", {suffix="  /", nl="", indent=""}) 
-    append_property(s, "duration", {suffix="  -", nl="", indent=""})
-    append_property(s, "percent-pos", {suffix="%", nl="", indent=""})
-
-    local ch_index = mp.get_property_number("chapter")
-    if ch_index and ch_index >= 0 then
-        append_property(s, "chapter-list/" .. tostring(ch_index) .. "/title", {prefix="Chapter:"})
-        append_property(s, "chapter-list/count",
-                        {prefix="(" .. tostring(ch_index + 1) .. "/", suffix=")", nl="",
-                         indent=" ", prefix_sep=" ", no_prefix_markup=true})
-    end
-
-	local demuxer_cache = mp.get_property_native("demuxer-cache-state", {})
-		if demuxer_cache["fw-bytes"] then
-			demuxer_cache = demuxer_cache["fw-bytes"] -- returns bytes
-		else
-			demuxer_cache = 0
-		end
-		local demuxer_secs = mp.get_property_number("demuxer-cache-duration", 0)
-		if demuxer_cache + demuxer_secs > 0 then
-			append(s, utils.format_bytes_humanized(demuxer_cache), {prefix="Total Cache:"})
-			append(s, format("%.1f", demuxer_secs), {prefix="(", suffix=" sec)", nl="",
-				no_prefix_markup=true, prefix_sep="", indent=o.prefix_sep})
-		local speed = mp.get_property_number("cache-speed", 0)
-        if speed > 0 then
-            append(s, utils.format_bytes_humanized(speed) .. "/s", {prefix="Speed:", nl="",
-                   indent=o.prefix_sep, no_prefix_markup=true})
-        end
-    end
-end
-
-local function add_video_custom(s)
-    local r = mp.get_property_native("video-params")
-    -- in case of e.g. lavi-complex there can be no input video, only output
-    if not r then
-        r = mp.get_property_native("video-out-params")
-    end
-    if not r then
-        return
-    end
-
-    append(s, "", {prefix=o.nl .. o.nl .. "Video:", nl="", indent=""})
-    if append_property(s, "video-codec", {prefix_sep="", nl="", indent=""}) then
-        append_property(s, "hwdec-current", {prefix="(hwdec:", nl="", indent=" ",
-                         no_prefix_markup=true, suffix=")"}, {no=true, [""]=true})
-    end
-    if append(s, r["w"], {prefix="Native Resolution:"}) then
-        append(s, r["h"], {prefix="x", nl="", indent=" ", prefix_sep=" ", no_prefix_markup=true})
-    end
-    append_property(s, "current-window-scale", {prefix="Window Scale:"})
-    append(s, format("%.2f", r["aspect"]), {prefix="Aspect Ratio:"})
-    append_property(s, "packet-video-bitrate", {prefix="Bitrate:", suffix=" kbps"})
-    append_filters(s, "vf", "Filters:")
-end
-
-local function add_audio_custom(s)
-    local r = mp.get_property_native("audio-params")
-    -- in case of e.g. lavi-complex there can be no input audio, only output
-    if not r then
-        r = mp.get_property_native("audio-out-params")
-    end
-    if not r then
-        return
-    end
-
-    append(s, "", {prefix=o.nl .. o.nl .. "Audio:", nl="", indent=""})
-    append_property(s, "audio-codec", {prefix_sep="", nl="", indent=""})
-    local cc = append(s, r["channel-count"], {prefix="Channels:"})
-    append(s, r["format"], {prefix="Format:", nl=cc and "" or o.nl})
-    append(s, r["samplerate"], {prefix="Sample Rate:", suffix=" Hz"})
-    append_property(s, "packet-audio-bitrate", {prefix="Bitrate:", suffix=" kbps"})
-end
-
-local function add_keyinfo(s)
-    append(s, "", {prefix=o.nl .. o.nl .. "Shortcut:", nl="", indent=""})
-    local cc = append(s, "", {prefix="| F1: cycle video | F2: cycle audio | F3: cycle sub | F4: chapter -1 | F6: playlist -1 |"})
-    local cc = append(s, "", {prefix="|   1: no video    |   2: no audio     |   3: no sub    | F5: chapter +1 | F7: playlist +1 |"})
-end
-
-local function add_chapter_metadata(s)
-    local ch_index = mp.get_property_number("chapter")
-    if ch_index and ch_index >= 0 then
-    append(s, "", {prefix="Chapter metadata:", nl="", indent=""})
-    append_property(s, "chapter-list/count",
-                        {prefix="(" .. tostring(ch_index + 1) .. "/", suffix=")", nl="",
-                         indent=" ", prefix_sep=" ", no_prefix_markup=true})
-	append_property(s, "chapter-metadata", {indent=""})
-    end
-end
-
-local function add_metadata(s)
-    append(s, "", {prefix=o.nl .. o.nl .. "Metadata:", nl="", indent=""})
-	append_property(s, "metadata", {nl="", indent=""})
-end
-
 
 -- Returns an ASS string with "normal" stats
-
-local function custom_stats()
-    local stats = {}
-    eval_ass_formatting()
-    add_header(stats)
-    add_file_custom(stats)
-    add_video_custom(stats)
-    add_audio_custom(stats)
-    add_keyinfo(stats)
-    return table.concat(stats)
-end
-
-local function metadata_stats()
-    local stats = {}
-    eval_ass_formatting()
-    add_header(stats)
-    add_chapter_metadata(stats)
-    add_metadata(stats)
-    return table.concat(stats)
-end
-
 local function default_stats()
     local stats = {}
     eval_ass_formatting()
@@ -749,13 +630,32 @@ local function default_stats()
     return table.concat(stats)
 end
 
+local function scroll_vo_stats(stats, fixed_items, offset)
+    local ret = {}
+    local count = #stats - fixed_items
+    offset = max(1, min((offset or 1), count))
+
+    for i, line in pairs(stats) do
+        if i <= fixed_items or i >= fixed_items + offset then
+            ret[#ret+1] = stats[i]
+        end
+    end
+    return ret, offset
+end
 
 -- Returns an ASS string with extended VO stats
 local function vo_stats()
     local stats = {}
     eval_ass_formatting()
     add_header(stats)
+    append(stats, "", {prefix=o.nl .. o.nl .. "Vo Stats:", nl="", indent=""})
+
+    -- first line (title) added next is considered fixed
+    local fixed_items = #stats + 1
     append_perfdata(stats, true)
+
+    local page = pages[o.key_page_3]
+    stats, page.offset = scroll_vo_stats(stats, fixed_items, page.offset)
     return table.concat(stats)
 end
 
@@ -763,7 +663,7 @@ local function perf_stats()
     local stats = {}
     eval_ass_formatting()
     add_header(stats)
-    local page = pages[o.key_page_6]
+    local page = pages[o.key_page_5]
     append(stats, "", {prefix=o.nl .. o.nl .. page.desc .. ":", nl="", indent=""})
     page.offset = append_general_perfdata(stats, page.offset)
     return table.concat(stats)
@@ -888,15 +788,120 @@ end
 cache_recorder_timer = mp.add_periodic_timer(0.25, record_cache_stats)
 cache_recorder_timer:kill()
 
+local function add_filecustom(s)
+    append(s, "", {prefix="File:", nl="", indent=""})
+    append_property(s, "filename", {prefix_sep="", nl="", indent=""})
+    if not (mp.get_property_osd("filename") == mp.get_property_osd("media-title")) then
+        append_property(s, "media-title", {prefix="Title:"})
+    end
+
+    local editions = mp.get_property_number("editions")
+    local edition = mp.get_property_number("current-edition")
+    local ed_cond = (edition and editions > 1)
+    if ed_cond then
+        append_property(s, "edition-list/" .. tostring(edition) .. "/title",
+                       {prefix="Edition:"})
+        append_property(s, "edition-list/count",
+                        {prefix="(" .. tostring(edition + 1) .. "/", suffix=")", nl="",
+                         indent=" ", prefix_sep=" ", no_prefix_markup=true})
+    end
+
+    local ch_index = mp.get_property_number("chapter")
+    if ch_index and ch_index >= 0 then
+        append_property(s, "chapter-list/" .. tostring(ch_index) .. "/title", {prefix="Chapter:",
+                        nl=ed_cond and "" or o.nl})
+        append_property(s, "chapter-list/count",
+                        {prefix="(" .. tostring(ch_index + 1) .. "/", suffix=")", nl="",
+                         indent=" ", prefix_sep=" ", no_prefix_markup=true})
+    end
+
+    local fs = append_property(s, "file-size", {prefix="Size:"})
+    append_property(s, "file-format", {prefix="Format/Protocol:", nl=fs and "" or o.nl})
+
+    local demuxer_cache = mp.get_property_native("demuxer-cache-state", {})
+    if demuxer_cache["fw-bytes"] then
+        demuxer_cache = demuxer_cache["fw-bytes"] -- returns bytes
+    else
+        demuxer_cache = 0
+    end
+    local demuxer_secs = mp.get_property_number("demuxer-cache-duration", 0)
+    if demuxer_cache + demuxer_secs > 0 then
+        append(s, utils.format_bytes_humanized(demuxer_cache), {prefix="Total Cache:"})
+        append(s, format("%.1f", demuxer_secs), {prefix="(", suffix=" sec)", nl="",
+               no_prefix_markup=true, prefix_sep="", indent=o.prefix_sep})
+    end
+    local speed = mp.get_property_number("cache-speed", 0)
+    if speed > 0 then
+        append(s, utils.format_bytes_humanized(speed) .. "/s", {prefix="Cache-speed:", nl="", indent=o.prefix_sep, no_prefix_markup=true})
+    end
+end
+
+local function add_videocustom(s)
+    local r = mp.get_property_native("video-params")
+    -- in case of e.g. lavi-complex there can be no input video, only output
+    if not r then
+        r = mp.get_property_native("video-out-params")
+    end
+    if not r then
+        return
+    end
+
+    append(s, "", {prefix=o.nl .. o.nl .. "Video:", nl="", indent=""})
+    if append_property(s, "video-codec", {prefix_sep="", nl="", indent=""}) then
+        append_property(s, "hwdec-current", {prefix="(hwdec:", nl="", indent=" ",
+                         no_prefix_markup=true, suffix=")"}, {no=true, [""]=true})
+    end
+    if append(s, r["w"], {prefix="Native Resolution:"}) then
+        append(s, r["h"], {prefix="x", nl="", indent=" ", prefix_sep=" ", no_prefix_markup=true})
+    end
+    append_property(s, "current-window-scale", {prefix="Window Scale:"})
+    if r["aspect"] ~= nil then
+        append(s, format("%.2f", r["aspect"]), {prefix="Aspect Ratio:"})
+    end
+    append_property(s, "packet-video-bitrate", {prefix="Bitrate:", suffix=" kbps"})
+    append_filters(s, "vf", "Filters:")
+end
+
+local function add_audiocustom(s)
+    local r = mp.get_property_native("audio-params")
+    -- in case of e.g. lavi-complex there can be no input audio, only output
+    if not r then
+        r = mp.get_property_native("audio-out-params")
+    end
+    if not r then
+        return
+    end
+
+    append(s, "", {prefix=o.nl .. o.nl .. "Audio:", nl="", indent=""})
+    append_property(s, "audio-codec", {prefix_sep="", nl="", indent=""})
+    local cc = append(s, r["channel-count"], {prefix="Channels:"})
+    append(s, r["format"], {prefix="Format:", nl=cc and "" or o.nl})
+    append(s, r["samplerate"], {prefix="Sample Rate:", suffix=" Hz"})
+    append_property(s, "packet-audio-bitrate", {prefix="Bitrate:", suffix=" kbps"})
+    append_filters(s, "af", "Filters:")
+end
+
+local function default_statscustom()
+    local stats = {}
+    eval_ass_formatting()
+    add_header(stats)
+    add_filecustom(stats)
+    add_videocustom(stats)
+    add_audiocustom(stats)
+    append(stats, "", {prefix=o.nl .. o.nl .. "Key binding:", nl="", indent=""})
+    append(stats, "", {prefix="| F1: cycle video | F2: cycle audio | F3: cycle sub | F4: chapter -1 | F6: playlist -1 |"})
+    append(stats, "", {prefix="|   1: no video    |   2: no audio     |   3: no sub    | F5: chapter +1 | F7: playlist +1 |"})
+    return table.concat(stats)
+end
+
 -- Current page and <page key>:<page function> mapping
 curr_page = o.key_page_1
 pages = {
-    [o.key_page_1] = { f = custom_stats, desc = "Custom" },
-    [o.key_page_2] = { f = metadata_stats, desc = "Metadata", scroll = true },
-    [o.key_page_3] = { f = default_stats, desc = "Default" },
+    [o.key_page_1] = { f = default_statscustom, desc = "Custom" },
+    [o.key_page_2] = { f = default_stats, desc = "Default" },
+    [o.key_page_3] = { f = vo_stats, desc = "Extended Frame Timings", scroll = true },
     [o.key_page_4] = { f = cache_stats, desc = "Cache Statistics" },
-	[o.key_page_5] = { f = vo_stats, desc = "Extended Frame Timings" },
-    [o.key_page_6] = { f = perf_stats, desc = "Internal performance info", scroll = true },
+    [o.key_page_5] = { f = perf_stats, desc = "Internal performance info", scroll = true },
 }
 
 
@@ -1077,8 +1082,11 @@ mp.add_key_binding(o.key_toggle, "display-stats-toggle", function() process_key_
 -- Single invocation bindings without key, can be used in input.conf to create
 -- bindings for a specific page: "e script-binding stats/display-page-2"
 for k, _ in pairs(pages) do
-    mp.add_key_binding(nil, "display-page-" .. k, function() process_key_binding(true) end,
-        {repeatable=true})
+    mp.add_key_binding(nil, "display-page-" .. k,
+        function()
+            curr_page = k
+            process_key_binding(true)
+        end, {repeatable=true})
 end
 
 -- Reprint stats immediately when VO was reconfigured, only when toggled

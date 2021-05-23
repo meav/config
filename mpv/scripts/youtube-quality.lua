@@ -14,10 +14,10 @@ local assdraw = require 'mp.assdraw'
 
 local opts = {
     --key bindings
-    toggle_menu_binding = "KP3",
+    toggle_menu_binding = "y",
     up_binding = "KP8",
     down_binding = "KP2",
-    select_binding = "KP_ENTER",
+    select_binding = "KP5",
 
     --formatting / cursors
     selected_and_inactive = "{\\c&H32CD32&}➔{\\c} - ",
@@ -238,6 +238,7 @@ function download_formats()
     return res, table_size(res)
 end
 
+
 -- register script message to show menu
 mp.register_script_message("toggle-quality-menu", 
 function()
@@ -247,6 +248,9 @@ function()
         show_menu()
     end
 end)
+
+-- keybind to launch menu
+mp.add_key_binding(opts.toggle_menu_binding, "quality-menu", show_menu)
 
 -- special thanks to reload.lua (https://github.com/4e6/mpv-reload/)
 function reload_resume()
@@ -269,6 +273,3 @@ function reload_resume()
         mp.register_event("file-loaded", seeker)
     end
 end
-
--- keybind to launch menu
-mp.add_key_binding(opts.toggle_menu_binding, "quality-menu", show_menu)
