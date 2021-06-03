@@ -1,0 +1,23 @@
+: 1622221775:0;exit
+: 1622221829:0;vim ~/.zshrc
+: 1622222764:0;ls -a ~
+: 1622222849:0;vim ~/.bin/zsh/vi-mode.zsh
+: 1622267981:0;vim ~/.tmux.conf
+: 1622268765:0;cmd /c start "" 
+: 1622269046:0;vim ~/.vim/vimrc
+: 1622269430:0;vim ~/.bin/timer/timer.sh
+: 1622274298:0;vim ~/.minttyrc
+: 1622276159:0;vim ~/.vim/pack/plugins/start/lightline/autoload/lightline/colorscheme/ayu_mirage.vim
+: 1622276225:0;vim ~/.p10k.zsh
+: 1622276513:0;for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done
+: 1622277449:0;desktop
+: 1622277451:0;quit
+: 1622277453:0;power
+: 1622277454:0;timer
+: 1622278348:0;cent
+: 1622278372:0;facebook
+: 1622278385:0;timer
+: 1622280710:0;vim ~/.zshrc
+: 1622284281:0;vim
+
+
