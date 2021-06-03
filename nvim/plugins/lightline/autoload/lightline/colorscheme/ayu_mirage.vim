@@ -5,10 +5,10 @@
 " Last Change: 2020/05/01 19:37:21.
 " =============================================================================
 
-let s:base0 = '#d9d7ce'
-let s:base1 = '#d9d7ce'
+let s:base0 = '#ffffff'
+let s:base1 = '#ffffff'
 let s:base2 = '#607080'
-let s:base3 = '#d9d7ce'
+let s:base3 = '#ffffff'
 let s:base00 = '#272d38'
 let s:base01 = '#272d38'
 let s:base02 = '#212733'
@@ -24,11 +24,11 @@ let s:green = '#bbe67e'
 
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 let s:p.normal.left = [ [ s:base02, s:blue ] ]
-let s:p.normal.middle = [ [ s:base2, '#d9d7ce' ] ]
+let s:p.normal.middle = [ [ s:base2, '#ffffff' ] ]
 let s:p.normal.right = [ [ s:base1, s:base01 ], [ s:base02, s:base0 ], [ s:base1, s:base01 ], [ s:base02, s:base0 ], [ s:base02, s:blue ], ]
-let s:p.inactive.left =  [ [ s:base023, '#d9d7ce' ] ]
-let s:p.inactive.middle = [ [ s:base023, '#d9d7ce' ] ]
-let s:p.inactive.right = [ [ s:base023, '#d9d7ce' ] ]
+let s:p.inactive.left =  [ [ s:base023, '#ffffff' ] ]
+let s:p.inactive.middle = [ [ s:base023, '#ffffff' ] ]
+let s:p.inactive.right = [ [ s:base023, '#ffffff' ] ]
 let s:p.insert.left = [ [ s:base02, s:green ] ]
 let s:p.insert.right = [ [ s:base1, s:base01 ], [ s:base02, s:base0 ], [ s:base1, s:base01 ], [ s:base02, s:base0 ], [ s:base02, s:green ], ]
 let s:p.replace.left = [ [ s:base02, s:red ] ]
@@ -37,7 +37,7 @@ let s:p.visual.left = [ [ s:base02, s:magenta ] ]
 let s:p.visual.right = [ [ s:base1, s:base01 ], [ s:base02, s:base0 ], [ s:base1, s:base01 ], [ s:base02, s:base0 ], [ s:base02, s:magenta ], ]
 let s:p.tabline.tabsel = [ [ s:base02, s:base03 ] ]
 let s:p.tabline.left = [ [ s:base3, s:base00 ]]
-let s:p.tabline.middle = [ [ s:base2, '#d9d7ce' ] ]
+let s:p.tabline.middle = [ [ s:base2, '#ffffff' ] ]
 let s:p.tabline.right = [ [ s:base02, s:green ], [ s:base02, s:magenta ],[ s:base02, s:green ]]
 let s:p.normal.error = [ [ s:base03, s:red ] ]
 let s:p.normal.warning = [ [ s:base023, s:yellow ] ]
