@@ -18,6 +18,7 @@ local opts = {
     up_binding = "KP8",
     down_binding = "KP2",
     select_binding = "KP5",
+    escape_binding = "ESC",
 
     --formatting / cursors
     selected_and_inactive = "{\\c&H32CD32&}➔{\\c} - ",
@@ -154,7 +155,7 @@ function show_menu()
         mp.set_property("ytdl-format", options[selected].format)
         reload_resume()
     end)
-    mp.add_forced_key_binding(opts.toggle_menu_binding, "escape", destroy)
+    mp.add_forced_key_binding(opts.escape_binding, "escape", destroy)
 
     draw_menu()
     return 
