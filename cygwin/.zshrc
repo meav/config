@@ -153,6 +153,7 @@ alias facebook='cmd.exe /c start "" explorer "C:\Users\Administrator\Music\cent\
 alias githubdesktop='cmd.exe /c start "" explorer "C:\Users\Administrator\AppData\Local\GitHubDesktop\GitHubDesktop.exe"'
 lanip=$(ipconfig | grep -m1 192.168 | awk '{print $14}' | tr -d '\r')
 alias text='tmux source-file ~/.data/meav.github.io/text.tmux'
+alias ghfs='qrencode -l H -t ANSIUTF8 http://$lanip:80; winpty /cygdrive/c/Users/Administrator/Music/GitHub/config/single\ binary/ghfs.exe --root "C:\Users\Administrator\Desktop" --default-sort /n --global-upload --global-mkdir --global-delete --global-archive --global-cors --listen-plain 80 --error-log - --theme "C:\Users\Administrator\Music\GitHub\config\single binary\Customtheme.zip"'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
