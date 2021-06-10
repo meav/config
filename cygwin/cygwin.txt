@@ -1,6 +1,6 @@
 curl,git,unzip,vim,wget,zip,zsh,aria2,tmux,qrencode,figlet,python38,python38-pip
 mintty --nopin --Title Timer --Border void --exec "%CYGWIN_ROOT%\home\meav\.bin\timer\timer.sh" -
-set "HOME=/home/%USERNAME%"
+set CYGWIN="nodosfilewarning winsymlinks:nativestrict"
 set SHELL=/bin/tmux
 set LC_ALL=en_US.UTF-8
 start "" "C:\Users\Administrator\Music\cygwin\tmux.lnk"
