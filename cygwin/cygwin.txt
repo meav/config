@@ -1,4 +1,4 @@
-curl,git,unzip,vim,wget,zip,zsh,aria2,tmux,qrencode,figlet,python38,python38-pip
+curl,git,unzip,vim,wget,zip,zsh,aria2,tmux,qrencode,figlet,python38,python38-pip,fzf
 mintty --nopin --Title Timer --Border void --exec "%CYGWIN_ROOT%\home\meav\.bin\timer\timer.sh" -
 set CYGWIN="nodosfilewarning winsymlinks:nativestrict"
 set SHELL=/bin/tmux

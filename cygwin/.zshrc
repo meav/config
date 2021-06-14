@@ -126,6 +126,7 @@ ls -l -a --color=always
 
 source ~/.bin/zsh/vi-mode.zsh
 source ~/.bin/zsh/zsh-sticky-prompt.zshrc
+source ~/.bin/zsh/fzf-completion.zsh
 
 hash -d ad=/cygdrive/c/Users/Administrator
 
