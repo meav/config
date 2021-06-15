@@ -5,6 +5,9 @@ Plug '~/.vim/plugins/vim-devicons'
 Plug '~/.vim/plugins/vim-surround'
 Plug '~/.vim/plugins/vim-venu'
 Plug '~/.vim/plugins/vim-matchtag'
+Plug '~/.vim/plugins/gv.vim'
+Plug '~/.vim/plugins/vim-fugitive'
+Plug '~/.vim/plugins/FocusPreviousWindowsWhenClose'
 call plug#end()
 
 " Color
@@ -101,6 +104,13 @@ endfunction
 "function! LightlineDate()
 "  return strftime('%A, %d/%m/%Y')
 "endfunction
+
+" Mapping
+map <C-a> <esc>:%y*<CR>
+map <C-h> <esc><C-w>h
+map <C-j> <esc><C-w>j
+map <C-k> <esc><C-w>k
+map <C-l> <esc><C-w>l
 
 " Venu
 let s:menu = venu#create('Venu')
