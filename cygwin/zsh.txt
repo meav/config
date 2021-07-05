@@ -1,0 +1,6 @@
+plugins=(zsh-autosuggestions globalias zsh-syntax-highlighting)
+
+for file in ~/.bin/zsh/*.zsh; do
+    source "$file"
+done
+source ~/.bin/zsh/fzf-completion.zsh

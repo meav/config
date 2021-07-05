@@ -1,0 +1,13 @@
+alias ls='ls --color=tty -a'
+alias rm='rm -i'
+alias desktop='cmd /c start "" explorer "D:\Users\a\Music\WW\desktop.vbs"'
+alias quit='rm --interactive=never ~/.zsh_history;cp /cygdrive/c/Users/Administrator/Music/GitHub/config/cygwin/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-DESKTOP-IF91IT1-5.8;rm --interactive=never ~/.zcompdump;exit'
+alias power='echo 00:00:00 > ~/.timer;rm --interactive=never ~/.zsh_history;cp /cygdrive/c/Users/Administrator/Music/GitHub/config/cygwin/.zsh_history_base ~/.zsh_history;rm --interactive=never ~/.zcompdump-DESKTOP-IF91IT1-5.8;rm --interactive=never ~/.zcompdump;explorer "D:\Users\a\Music\WW\power.vbs"'
+alias history='rm --interactive=never /cygdrive/c/Users/Administrator/Music/GitHub/config/cygwin/.zsh_history_base; cp ~/.zsh_history /cygdrive/c/Users/Administrator/Music/GitHub/config/cygwin/.zsh_history_base; vim /cygdrive/c/Users/Administrator/Music/GitHub/config/cygwin/.zsh_history_base'
+alias timer='explorer "C:\Users\Administrator\Music\cygwin\timer.cmd"'
+alias cent='cmd.exe /c start "" explorer "C:\Users\Administrator\Music\cent\chrome.exe"'
+alias facebook='cmd.exe /c start "" explorer "C:\Users\Administrator\Music\cent\Facebook.lnk"'
+alias githubdesktop='cmd.exe /c start "" explorer "C:\Users\Administrator\AppData\Local\GitHubDesktop\GitHubDesktop.exe"'
+lanip=$(ipconfig | grep -m1 192.168 | awk '{print $14}' | tr -d '\r')
+alias text='tmux source-file ~/.data/meav.github.io/text.tmux'
+alias ghfs='qrencode -l H -t ANSIUTF8 http://$lanip:80; winpty ~/ghfs.exe --root "C:\Users\Administrator\Desktop" --default-sort /n --global-upload --global-mkdir --global-delete --global-archive --global-cors --listen-plain 80 --error-log - --theme "C:\Users\Administrator\Music\cygwin\cygwin\home\meav\custom-theme.zip"'
