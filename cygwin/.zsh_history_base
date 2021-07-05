@@ -18,6 +18,7 @@
 : 1622278372:0;facebook
 : 1622278385:0;timer
 : 1622280710:0;vim ~/.zshrc
-: 1622284281:0;vim
+: 1623340148:0;wget --continue --progress=bar:force:noscroll 
+: 1623340237:0;aria2c --check-certificate=false --max-concurrent-downloads=2 --continue --max-tries=0 --disk-cache=0 --download-result=full --file-allocation=trunc --summary-interval=0 --max-overall-download-limit=4M --split=5 --max-connection-per-server=5 
 
 

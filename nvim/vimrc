@@ -8,6 +8,7 @@ Plug '~/.vim/plugins/vim-matchtag'
 Plug '~/.vim/plugins/gv.vim'
 Plug '~/.vim/plugins/vim-fugitive'
 Plug '~/.vim/plugins/FocusPreviousWindowsWhenClose'
+Plug '~/.vim/plugins/vim-nginx'
 call plug#end()
 
 " Color
