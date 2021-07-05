@@ -88,6 +88,8 @@ ZSH_HIGHLIGHT_STYLES[function]='fg=#30942b,bold'
 ZSH_HIGHLIGHT_STYLES[command]='fg=#30942b,bold'
 ZSH_HIGHLIGHT_STYLES[commandseparator]='fg=#30942b,bold'
 
+zle_highlight+=(paste:none)
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
