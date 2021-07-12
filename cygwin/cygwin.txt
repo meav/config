@@ -5,3 +5,5 @@ set SHELL=/bin/tmux
 set LC_ALL=en_US.UTF-8
 start "" "C:\Users\Administrator\Music\cygwin\tmux.lnk"
 C:\Users\Administrator\Music\cygwin\cygwin\bin\mintty.exe --Border void -T tmux -
+[core]
+	autocrlf = false
