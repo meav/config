@@ -135,3 +135,23 @@ call venu#addItem(s:menu, 'Snippets', s:snippet)
 call venu#addItem(s:menu, 'List Plugins', 'PlugStatus')
 """
 call venu#register(s:menu)
+
+" Custom theme
+highlight Normal guibg=#ffffff
+highlight CursorLine guibg=#ffffff
+highlight CursorLineNr guibg=#e6fce6 guifg=#5f5f00 cterm=bold
+highlight LineNr guibg=#e6fce6 guifg=#383a42
+highlight MatchParen cterm=bold
+highlight Function cterm=bold
+highlight Statement cterm=bold
+highlight Conditional cterm=bold
+highlight Repeat cterm=bold
+highlight Label cterm=bold
+highlight PreProc cterm=bold
+highlight Include cterm=bold
+highlight Define cterm=bold
+highlight Macro cterm=bold
+highlight PreCondit cterm=bold
+highlight Type cterm=bold
+highlight StorageClass cterm=bold
+highlight Todo cterm=bold
